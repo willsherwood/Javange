@@ -4,21 +4,24 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.BitSet;
 
+import sherwood.gameScreen.GameScreen;
 import sherwood.gameScreen.inputs.Control;
 
 public class InputDebugScreen extends ScreenState {
 
 	protected BitSet keys;
 	protected int iteration;
-
+	private int y = 0;
+	
 	public InputDebugScreen() {
 		keys = new BitSet(0);
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.clearRect(0, 0, 640, 640);
 		g.setColor(Color.RED);
+		g.drawRect(400, y=(y+1)%200, 5, 5);
+		g.drawRect(0, 0, GameScreen.WIDTH-1, GameScreen.HEIGHT-1);
 		for (int y = 0; y < Control.values().length; y++) {
 			if (keys.get(y))
 				g.fillRect(5, y * 20 + 8, 15, 15);

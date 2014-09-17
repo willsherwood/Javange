@@ -1,5 +1,6 @@
 package sherwood.gameScreen;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -11,10 +12,10 @@ import sherwood.gameScreen.inputs.KeyboardInput;
 import sherwood.screenStates.ScreenState;
 
 public class GameScreen extends JFrame {
-
-	public static final int TICKSPERSEC = 60;
-	public static final int WIDTH = 1024;
-	public static final int HEIGHT = 768;
+	
+	public static int TICKSPERSEC = 60;
+	public static int WIDTH = 640;
+	public static int HEIGHT = 480;
 
 	protected ScreenState screenState;
 	protected BufferedImage db;
@@ -24,19 +25,17 @@ public class GameScreen extends JFrame {
 	protected JComponent drawComponent;
 
 	public GameScreen(ScreenState screenState) {
-		super();
-
+		
 		this.screenState = screenState;
 		this.kbinput = new KeyboardInput();
 		this.drawComponent = new DrawComponent();
 		drawComponent.addKeyListener(kbinput);
-		addKeyListener(kbinput);
 		this.db = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		this.g = (Graphics2D) db.getGraphics();
 
-		setSize(640, 640);
 		setUndecorated(false);
 		add(drawComponent);
+		pack();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -60,6 +59,7 @@ public class GameScreen extends JFrame {
 	private void paintToBuffer() {
 		Graphics2D gr = (Graphics2D) drawComponent.getGraphics();
 		gr.drawImage(db, 0, 0, null);
+		g.clearRect(0, 0, 640, 640);
 	}
 
 	protected void sleep(long time) {
@@ -79,6 +79,10 @@ public class GameScreen extends JFrame {
 		public DrawComponent() {
 			super();
 			setFocusable(true);
+		}
+		
+		@Override public Dimension getPreferredSize() {
+			return new Dimension(GameScreen.WIDTH, GameScreen.HEIGHT);
 		}
 	}
 }
