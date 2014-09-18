@@ -53,9 +53,6 @@ public class GameScreen extends JFrame {
 		s.start();
 	}
 
-	/**
-	 * @return the screenState
-	 */
 	public ScreenState getScreenState() {
 		return screenState;
 	}
@@ -64,16 +61,10 @@ public class GameScreen extends JFrame {
 		return updateAlgorithm;
 	}
 
-	/**
-	 * @return the g
-	 */
 	public Graphics2D getG() {
 		return g;
 	}
 
-	/**
-	 * @return the kbinput
-	 */
 	public Input getKbinput() {
 		return kbinput;
 	}
