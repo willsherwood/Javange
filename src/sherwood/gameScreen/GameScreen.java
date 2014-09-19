@@ -2,19 +2,19 @@ package sherwood.gameScreen;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import sherwood.gameScreen.inputs.Input;
 import sherwood.gameScreen.inputs.KeyboardInput;
 import sherwood.main.Main;
 import sherwood.screenStates.ScreenState;
 
 public class GameScreen extends JFrame {
 	
-	public static int TICKSPERSEC = 60;
+	public int TICKSPERSEC = 60;
 	public static int WIDTH = 640;
 	public static int HEIGHT = 480;
 
@@ -22,7 +22,7 @@ public class GameScreen extends JFrame {
 	protected ScreenState screenState;
 	protected BufferedImage db;
 	protected Graphics2D g;
-	protected Input kbinput;
+	protected KeyboardInput kbinput;
 
 	protected JComponent drawComponent;
 
@@ -35,9 +35,7 @@ public class GameScreen extends JFrame {
 	}
 	
 	private GameScreen(ScreenState screenState) {
-		this.updateAlgorithm = new FPSUpdateAlgorithm();
 		this.screenState = screenState;
-		this.kbinput = new KeyboardInput();
 		this.drawComponent = new DrawComponent();
 		drawComponent.addKeyListener(kbinput);
 		this.db = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -65,7 +63,7 @@ public class GameScreen extends JFrame {
 		return g;
 	}
 
-	public Input getKbinput() {
+	public KeyboardInput getKbinput() {
 		return kbinput;
 	}
 
@@ -73,6 +71,23 @@ public class GameScreen extends JFrame {
 		Graphics2D gr = (Graphics2D) drawComponent.getGraphics();
 		gr.drawImage(db, 0, 0, null);
 		g.clearRect(0, 0, 640, 640);
+	}
+	
+	public void requestScreenState(ScreenState s) {
+		this.screenState = s;
+		s.init();
+	}
+	
+	public void requestUpdateAlgorithm(UpdateAlgorithm u) {
+		this.updateAlgorithm = u;
+	}
+	
+	public void requestKeyInputMechanism(KeyboardInput k) {
+		this.kbinput = k;
+		drawComponent.addKeyListener(this.kbinput);
+		for (KeyListener kt : drawComponent.getKeyListeners()) {
+			System.out.println(kt);
+		}
 	}
 
 	public static final class DrawComponent extends JComponent {

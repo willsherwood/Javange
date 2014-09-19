@@ -2,7 +2,7 @@ package sherwood.gameScreen;
 
 import java.awt.Graphics2D;
 
-import sherwood.gameScreen.inputs.Input;
+import sherwood.gameScreen.inputs.KeyboardInput;
 import sherwood.screenStates.ScreenState;
 
 /**
@@ -17,5 +17,5 @@ public interface UpdateAlgorithm {
 	 * @param input
 	 */
 	public void update(ScreenState screenState, Graphics2D graphics,
-			GameScreen gameScreen, Input input);
+			GameScreen gameScreen, KeyboardInput input);
 }

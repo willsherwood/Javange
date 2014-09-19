@@ -6,3 +6,4 @@ Down: 40
 Sprint: 16
 Jump: 32
 Action: 88
+Start: 27
