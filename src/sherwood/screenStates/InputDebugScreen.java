@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.Arrays;
 import java.util.BitSet;
 
+import sherwood.audio.Sound;
 import sherwood.gameScreen.GameScreen;
 import sherwood.gameScreen.inputs.Control;
 
@@ -20,7 +21,7 @@ public class InputDebugScreen extends ScreenState {
 	@Override
 	public void draw(Graphics2D g) {
 		g.setColor(Color.RED);
-		g.drawRect(0, 0, GameScreen.WIDTH-1, GameScreen.HEIGHT-1);
+		g.drawRect(0, 0, GameScreen.WIDTH - 1, GameScreen.HEIGHT - 1);
 		for (int y = 0; y < Control.values().length; y++) {
 			if (keys.get(y))
 				g.fillRect(5, y * 20 + 8, 15, 15);
@@ -31,7 +32,18 @@ public class InputDebugScreen extends ScreenState {
 	@Override
 	public void step(BitSet keys) {
 		this.keys = keys;
-		System.out.println(keys);
+		if (keys.get(Control.getCondensed(Control.UP))) {
+			Sound.BLUE.play();
+		}
+		if (keys.get(Control.getCondensed(Control.DOWN))) {
+			Sound.RED.play();
+		}
+		if (keys.get(Control.getCondensed(Control.LEFT))) {
+			Sound.GREEN.play();
+		}
+		if (keys.get(Control.getCondensed(Control.RIGHT))) {
+			Sound.YELLOW.play();
+		}
 	}
 
 }
