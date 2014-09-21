@@ -1,7 +1,9 @@
-package sherwood.screenStates;
+package sherwood.screenStates.objective;
 
 import java.awt.Graphics2D;
 import java.util.BitSet;
+
+import sherwood.screenStates.ScreenState;
 
 public abstract class ObjectiveDrawingState extends ScreenState {
 

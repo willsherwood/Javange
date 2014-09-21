@@ -1,4 +1,4 @@
-package sherwood.screenStates;
+package sherwood.screenStates.objective;
 
 import java.awt.Graphics2D;
 
