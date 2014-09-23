@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class ConfigHandler {
 
-	public static final String configPath = "config/config.txt";
+	public static final String configPath = "src/res/config/config.txt";
 	private static Map<String, String> configMap;
 	private static FileWriter fw;
 	private static String nl = System.getProperty("line.separator");

@@ -15,7 +15,6 @@ public class ControlKeyboardInput extends KeyboardInput {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode());
 		set(e.getKeyCode(), true);
 	}
 

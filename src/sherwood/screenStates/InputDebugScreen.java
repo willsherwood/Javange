@@ -32,18 +32,6 @@ public class InputDebugScreen extends ScreenState {
 	@Override
 	public void step(BitSet keys) {
 		this.keys = keys;
-		if (keys.get(Control.getCondensed(Control.UP))) {
-			Sound.BLUE.play();
-		}
-		if (keys.get(Control.getCondensed(Control.DOWN))) {
-			Sound.RED.play();
-		}
-		if (keys.get(Control.getCondensed(Control.LEFT))) {
-			Sound.GREEN.play();
-		}
-		if (keys.get(Control.getCondensed(Control.RIGHT))) {
-			Sound.YELLOW.play();
-		}
 	}
 
 }
