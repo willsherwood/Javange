@@ -5,7 +5,13 @@ import java.awt.Image;
 /**
  * 
  */
-public interface Mapping {
+public abstract class Mapping {
 
-	public Image map(Image img);
+	public abstract Image map(Image img);
+	
+	public static Image chain(Image img, Mapping... maps) {
+		for (Mapping m : maps)
+			img = m.map(img);
+		return img;
+	}
 }

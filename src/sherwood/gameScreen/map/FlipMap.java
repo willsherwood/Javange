@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 /**
  * 
  */
-public class FlipMap implements Mapping {
+public class FlipMap extends Mapping {
 
 	private boolean flipX, flipY;
 	
