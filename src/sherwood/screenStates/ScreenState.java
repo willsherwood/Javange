@@ -6,6 +6,7 @@ import java.util.BitSet;
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
 import sherwood.gameScreen.inputs.ControlKeyboardInput;
+import sherwood.gameScreen.map.FlipMap;
 
 public abstract class ScreenState {
 
@@ -15,6 +16,6 @@ public abstract class ScreenState {
 
 	public void init() {
 		GameScreen.get().requestKeyInputMechanism(new ControlKeyboardInput());
-		GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm());
+		GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm(new FlipMap()));
 	}
 }

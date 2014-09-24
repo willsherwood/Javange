@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import sherwood.gameScreen.inputs.KeyboardInput;
+import sherwood.gameScreen.map.Mapping;
 import sherwood.main.Main;
 import sherwood.screenStates.ScreenState;
 
@@ -67,9 +68,9 @@ public class GameScreen extends JFrame {
 		return kbinput;
 	}
 
-	public void paintToBuffer() {
+	public void paintToBuffer(Mapping map) {
 		Graphics2D gr = (Graphics2D) drawComponent.getGraphics();
-		gr.drawImage(db, 0, 0, null);
+		gr.drawImage(map == null? db : map.map(db), 0, 0, null);
 		g.clearRect(0, 0, 640, 640);
 	}
 	
