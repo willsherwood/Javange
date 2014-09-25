@@ -39,14 +39,11 @@ public class GameScreen extends JFrame {
 		this.screenState = screenState;
 		this.drawComponent = new DrawComponent();
 		drawComponent.addKeyListener(kbinput);
-		this.db = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-		this.g = (Graphics2D) db.getGraphics();
-
-		setUndecorated(false);
-		add(drawComponent);
-		pack();
-		setVisible(true);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		add(drawComponent);
+		requestNewDimension(new Dimension(800, 608));
+		setVisible(true);
 		
 		Thread s = new UpdateThread(this::getScreenState, this::getG, this::getKbinput, GameScreen::get, this::getUpdateAlgorithm);
 		s.start();
@@ -71,7 +68,7 @@ public class GameScreen extends JFrame {
 	public void paintToBuffer(Mapping map) {
 		Graphics2D gr = (Graphics2D) drawComponent.getGraphics();
 		gr.drawImage(map == null? db : map.map(db), 0, 0, null);
-		g.clearRect(0, 0, 640, 640);
+		g.clearRect(0, 0, WIDTH, HEIGHT);
 	}
 	
 	public void requestScreenState(ScreenState s) {
