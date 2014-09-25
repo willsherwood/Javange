@@ -1,11 +1,10 @@
 package sherwood.screenStates;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.util.Arrays;
 import java.util.BitSet;
 
-import sherwood.audio.Sound;
 import sherwood.gameScreen.GameScreen;
 import sherwood.gameScreen.inputs.Control;
 
@@ -32,6 +31,9 @@ public class InputDebugScreen extends ScreenState {
 	@Override
 	public void step(BitSet keys) {
 		this.keys = keys;
+		if (keys.get(Control.getCondensed(Control.ACTION))) {
+			GameScreen.get().requestNewDimension(new Dimension(GameScreen.WIDTH + 10, GameScreen.HEIGHT + 10));
+		}
 	}
 
 }

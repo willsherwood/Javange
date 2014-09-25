@@ -90,6 +90,14 @@ public class GameScreen extends JFrame {
 			System.out.println(kt);
 		}
 	}
+	
+	public void requestNewDimension(Dimension d) {
+		WIDTH = d.width;
+		HEIGHT = d.height;
+		this.db = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		this.g = (Graphics2D) db.getGraphics();
+		this.pack();
+	}
 
 	public static final class DrawComponent extends JComponent {
 
