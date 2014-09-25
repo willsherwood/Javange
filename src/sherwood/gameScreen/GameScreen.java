@@ -38,7 +38,6 @@ public class GameScreen extends JFrame {
 	private GameScreen(ScreenState screenState) {
 		this.screenState = screenState;
 		this.drawComponent = new DrawComponent();
-		drawComponent.addKeyListener(kbinput);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(drawComponent);
