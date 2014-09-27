@@ -17,7 +17,7 @@ public class PlatformDemo extends ScreenState {
 	private List<Block> blocks;
 
 	public PlatformDemo() {
-		player = new Player(300, 400, 11, 21);
+		player = new Player(300, 400, 32, 32);
 		player.ySet(Projectile.ACCELERATION, 0.4f);
 
 		blocks = new ArrayList<>();
@@ -29,6 +29,7 @@ public class PlatformDemo extends ScreenState {
 			blocks.add(new Block(i * 32, 0));
 		for (int i = 0; i < GameScreen.HEIGHT / 32; i++)
 			blocks.add(new Block(GameScreen.WIDTH - 32, i * 32));
+		blocks.add(new Block(311, 311));
 		col = new CollisionUtil(blocks);
 	}
 

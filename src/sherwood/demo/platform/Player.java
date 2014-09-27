@@ -15,18 +15,28 @@ public class Player extends Entity {
 
 	@Override
 	protected void doKinematics() {
-		Block a = PlatformDemo.col.blockAt(x[1] + x[0], y[0]);
-		if (a != null) {
+		Block a1 = PlatformDemo.col.blockAt(x[1] + x[0], y[0]);
+		Block a2 = PlatformDemo.col.blockAt(x[1] + x[0] + width, y[0]);
+		Block b1 = PlatformDemo.col.blockAt(x[0], y[0] + y[1]);
+		Block b2 = PlatformDemo.col.blockAt(x[0], y[0] + y[1] + height);
+		
+		if (a1 != null) {
+			CollisionUtil.moveToContact(this, a1, CollisionUtil.LEFT);
 			x[1] = 0;
-			CollisionUtil.moveToContact(this, a, x[1] > 0 ? CollisionUtil.RIGHT
-					: CollisionUtil.LEFT);
 		}
-		Block b = PlatformDemo.col.blockAt(x[0], y[0] + y[1]);
-		if (b != null) {
+		if (a2 != null) {
+			CollisionUtil.moveToContact(this, a2, CollisionUtil.RIGHT);
+			x[1] = 0;
+		}
+		if (b1 != null) {
+			CollisionUtil.moveToContact(this, b1, CollisionUtil.TOP);
 			y[1] = 0;
-			CollisionUtil.moveToContact(this, b, y[1] > 0 ? CollisionUtil.TOP
-					: CollisionUtil.BOTTOM);
+		} 
+		if (b2 != null) {
+			CollisionUtil.moveToContact(this, b2, CollisionUtil.BOTTOM);
+			y[1] = 0;
 		}
+
 		super.doKinematics();
 	}
 

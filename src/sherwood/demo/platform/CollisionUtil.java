@@ -15,7 +15,6 @@ public class CollisionUtil {
 	 * the *SIDE* of A is moved into contact with opposite side of B
 	 */
 	public static void moveToContact(Entity a, Entity b, int side) {
-		System.out.println(b.xGet(Projectile.POSITION));
 		switch (side) {
 		case LEFT:
 			a.xSet(Projectile.POSITION, b.xGet(Projectile.POSITION) + b.width);
@@ -36,10 +35,11 @@ public class CollisionUtil {
 
 	public Block blockAt(float x, float y) {
 		for (Block b : blocks) {
-			float dx = b.xGet(Projectile.POSITION) - x;
-			float dy = b.yGet(Projectile.POSITION) - y;
-			if (dx < 32 && dx >= 0 && dy < 32 & dy >= 0)
-				return b;
+			float bx = b.xGet(Projectile.POSITION);
+			float by = b.yGet(Projectile.POSITION);
+			if (x >= bx && x < bx + 32)
+				if (y >= by && y < by + 32)
+					return b;
 		}
 		return null;
 	}
