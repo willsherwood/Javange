@@ -17,6 +17,6 @@ public abstract class ScreenState {
 
 	public void init() {
 		GameScreen.get().requestKeyInputMechanism(new ControlKeyboardInput());
-		GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm(new StaticMap(70)));
+		GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm());
 	}
 }

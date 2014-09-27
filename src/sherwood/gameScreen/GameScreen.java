@@ -16,8 +16,8 @@ import sherwood.screenStates.ScreenState;
 public class GameScreen extends JFrame {
 	
 	public int TICKSPERSEC = 60;
-	public static int WIDTH = 640;
-	public static int HEIGHT = 480;
+	public static int WIDTH = 800;
+	public static int HEIGHT = 608;
 
 	protected UpdateAlgorithm updateAlgorithm;
 	protected ScreenState screenState;
