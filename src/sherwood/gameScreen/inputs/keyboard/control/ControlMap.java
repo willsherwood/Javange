@@ -1,4 +1,4 @@
-package sherwood.gameScreen.inputs;
+package sherwood.gameScreen.inputs.keyboard.control;
 
 import java.util.Map;
 import java.util.TreeMap;

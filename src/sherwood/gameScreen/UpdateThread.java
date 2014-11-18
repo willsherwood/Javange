@@ -3,7 +3,7 @@ package sherwood.gameScreen;
 import java.awt.Graphics2D;
 import java.util.function.Supplier;
 
-import sherwood.gameScreen.inputs.KeyboardInput;
+import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 import sherwood.screenStates.ScreenState;
 
 public class UpdateThread extends Thread {

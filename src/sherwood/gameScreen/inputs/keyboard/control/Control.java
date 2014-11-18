@@ -1,4 +1,4 @@
-package sherwood.gameScreen.inputs;
+package sherwood.gameScreen.inputs.keyboard.control;
 
 public enum Control {
 	UP, DOWN, LEFT, RIGHT, SPRINT, JUMP, ACTION, START;

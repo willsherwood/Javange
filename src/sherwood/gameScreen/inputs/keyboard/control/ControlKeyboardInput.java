@@ -1,9 +1,9 @@
-package sherwood.gameScreen.inputs;
+package sherwood.gameScreen.inputs.keyboard.control;
 
 import java.awt.event.KeyEvent;
 import java.util.BitSet;
 
-import sherwood.gameScreen.inputs.KeyboardInput;
+import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 
 public class ControlKeyboardInput extends KeyboardInput {
 
@@ -31,7 +31,7 @@ public class ControlKeyboardInput extends KeyboardInput {
 	}
 
 	@Override
-	public BitSet getBitset() {
+	public BitSet getBitSet() {
 		return bitset;
 	}
 

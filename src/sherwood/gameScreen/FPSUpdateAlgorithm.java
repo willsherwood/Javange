@@ -3,7 +3,7 @@ package sherwood.gameScreen;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import sherwood.gameScreen.inputs.KeyboardInput;
+import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 import sherwood.gameScreen.map.Mapping;
 import sherwood.screenStates.ScreenState;
 
@@ -30,7 +30,7 @@ public class FPSUpdateAlgorithm implements UpdateAlgorithm {
 	public void update(ScreenState screenState, Graphics2D graphics,
 			GameScreen gameScreen, KeyboardInput input) {
 		t1 = System.currentTimeMillis();
-		screenState.step(input.getBitset());
+		screenState.step(input.getBitSet());
 		screenState.draw(graphics);
 		gameScreen.paintToBuffer(map);
 		graphics.setColor(Color.WHITE);

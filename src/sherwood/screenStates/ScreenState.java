@@ -6,7 +6,7 @@ import java.util.BitSet;
 
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
-import sherwood.gameScreen.inputs.ControlKeyboardInput;
+import sherwood.gameScreen.inputs.keyboard.control.ControlKeyboardInput;
 import sherwood.gameScreen.map.StaticMap;
 
 public abstract class ScreenState {

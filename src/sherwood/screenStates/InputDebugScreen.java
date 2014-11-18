@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.util.BitSet;
 
 import sherwood.gameScreen.GameScreen;
-import sherwood.gameScreen.inputs.Control;
+import sherwood.gameScreen.inputs.keyboard.control.Control;
 
 public class InputDebugScreen extends ScreenState {
 

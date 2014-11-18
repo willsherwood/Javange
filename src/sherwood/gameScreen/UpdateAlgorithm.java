@@ -2,7 +2,7 @@ package sherwood.gameScreen;
 
 import java.awt.Graphics2D;
 
-import sherwood.gameScreen.inputs.KeyboardInput;
+import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 import sherwood.screenStates.ScreenState;
 
 /**

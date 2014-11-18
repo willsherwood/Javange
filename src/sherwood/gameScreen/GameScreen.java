@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import sherwood.gameScreen.inputs.KeyboardInput;
+import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 import sherwood.gameScreen.map.Mapping;
 import sherwood.main.Main;
 import sherwood.screenStates.ScreenState;
