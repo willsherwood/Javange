@@ -3,6 +3,7 @@ package sherwood.gameScreen.inputs.keyboard.fullKeys;
 import java.awt.event.KeyEvent;
 import java.util.BitSet;
 
+import sherwood.demo.CharacterParticle;
 import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 
 public class FullKeyboardInput extends KeyboardInput {
@@ -26,6 +27,10 @@ public class FullKeyboardInput extends KeyboardInput {
 	@Override
 	public BitSet getBitSet() {
 		return bitset;
+	}
+
+	public static String getKey(int i) {
+		return KeyEvent.getKeyText(i);
 	}
 
 }
