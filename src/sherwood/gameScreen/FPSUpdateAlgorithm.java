@@ -38,8 +38,6 @@ public class FPSUpdateAlgorithm implements UpdateAlgorithm {
 		t2 = System.currentTimeMillis();
 		ThreadUtil.sleep(1000 / GameScreen.get().TICKSPERSEC - (t2 - t1));
 		time = time * (1.0 - weight) + (System.currentTimeMillis() - t1) * weight;
-		// no FPS cap
-		
 	}
 
 }

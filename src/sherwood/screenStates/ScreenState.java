@@ -1,13 +1,11 @@
 package sherwood.screenStates;
 
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.BitSet;
 
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
 import sherwood.gameScreen.inputs.keyboard.control.ControlKeyboardInput;
-import sherwood.gameScreen.map.StaticMap;
 
 public abstract class ScreenState {
 
