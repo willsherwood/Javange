@@ -1,8 +1,8 @@
 package sherwood.screenStates.objective;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public interface Drawable {
 
-	public boolean draw(Graphics2D g);
+    public boolean draw (Graphics2D g);
 }

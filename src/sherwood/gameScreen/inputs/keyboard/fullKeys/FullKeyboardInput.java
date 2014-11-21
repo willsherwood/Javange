@@ -1,36 +1,35 @@
 package sherwood.gameScreen.inputs.keyboard.fullKeys;
 
-import java.awt.event.KeyEvent;
-import java.util.BitSet;
-
-import sherwood.demo.CharacterParticle;
 import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
+
+import java.awt.event.KeyEvent;
+import java.util.*;
 
 public class FullKeyboardInput extends KeyboardInput {
 
-	protected BitSet bitset;
+    protected BitSet bitset;
 
-	public FullKeyboardInput() {
-		bitset = new BitSet(256);
-	}
+    public FullKeyboardInput () {
+        bitset = new BitSet(256);
+    }
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		bitset.set(e.getKeyCode(), true);
-	}
+    public static String getKey (int i) {
+        return KeyEvent.getKeyText(i);
+    }
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		bitset.set(e.getKeyCode(), false);
-	}
+    @Override
+    public void keyPressed (KeyEvent e) {
+        bitset.set(e.getKeyCode(), true);
+    }
 
-	@Override
-	public BitSet getBitSet() {
-		return bitset;
-	}
+    @Override
+    public void keyReleased (KeyEvent e) {
+        bitset.set(e.getKeyCode(), false);
+    }
 
-	public static String getKey(int i) {
-		return KeyEvent.getKeyText(i);
-	}
+    @Override
+    public BitSet getBitSet () {
+        return bitset;
+    }
 
 }

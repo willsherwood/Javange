@@ -1,22 +1,21 @@
 package sherwood.gameScreen.inputs.keyboard.control;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 import sherwood.iohandlers.ConfigHandler;
+
+import java.util.*;
 
 public class ControlMap {
 
-	protected static Map<Integer, Control> keyMap;
+    protected static Map<Integer, Control> keyMap;
 
-	static {
-		keyMap = new TreeMap<>();
-		for (Control c : Control.values())
-			keyMap.put(Integer.valueOf(ConfigHandler.load(c.toString())), c);
-	}
+    static {
+        keyMap = new TreeMap<>();
+        for (Control c : Control.values())
+            keyMap.put(Integer.valueOf(ConfigHandler.load(c.toString())), c);
+    }
 
-	public static Control getControl(int keyCode) {
-		return keyMap.get(keyCode);
-	}
+    public static Control getControl (int keyCode) {
+        return keyMap.get(keyCode);
+    }
 
 }

@@ -1,10 +1,10 @@
 package sherwood.gameScreen.inputs.mouse;
 
-import java.awt.event.MouseAdapter;
-
 import sherwood.gameScreen.inputs.Input;
+
+import java.awt.event.MouseAdapter;
 
 public abstract class MouseInput extends MouseAdapter implements Input, MouseDecoder {
 
-	public abstract boolean isMouseDown();
+    public abstract boolean isMouseDown ();
 }

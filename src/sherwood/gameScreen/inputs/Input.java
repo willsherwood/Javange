@@ -1,7 +1,7 @@
 package sherwood.gameScreen.inputs;
 
-import java.util.BitSet;
+import java.util.*;
 
-public interface Input  {
-	public abstract BitSet getBitSet();
+public interface Input {
+    public abstract BitSet getBitSet ();
 }
