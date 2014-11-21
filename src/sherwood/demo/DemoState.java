@@ -1,19 +1,17 @@
 package sherwood.demo;
 
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.List;
-
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
 import sherwood.gameScreen.inputs.keyboard.fullKeys.FullKeyboardInput;
 import sherwood.screenStates.ScreenState;
 import sherwood.screenStates.objective.Drawable;
 
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
 public class DemoState extends ScreenState {
 
-	private BitSet currentKeys;
 	private List<CharacterParticle> particles;
 
 	@Override

@@ -1,11 +1,10 @@
 package sherwood.gameScreen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 import sherwood.gameScreen.map.Mapping;
 import sherwood.screenStates.ScreenState;
+
+import java.awt.*;
 
 public class FPSUpdateAlgorithm implements UpdateAlgorithm {
 
@@ -36,7 +35,7 @@ public class FPSUpdateAlgorithm implements UpdateAlgorithm {
 		graphics.setColor(Color.WHITE);
 		graphics.drawString(String.format("FPS: %.1f", 1000 / time), GameScreen.WIDTH - 80, GameScreen.HEIGHT - 20);
 		t2 = System.currentTimeMillis();
-		ThreadUtil.sleep(1000 / GameScreen.get().TICKSPERSEC - (t2 - t1));
+		ThreadUtil.sleep(1000 / GameScreen.get().DEFAULT_TICKSPERSEC - (t2 - t1));
 		time = time * (1.0 - weight) + (System.currentTimeMillis() - t1) * weight;
 	}
 

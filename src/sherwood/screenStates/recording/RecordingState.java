@@ -1,11 +1,10 @@
-package sherwood.screenStates;
+package sherwood.screenStates.recording;
 
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.BitSet;
+import sherwood.screenStates.ScreenState;
+
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-
-import sherwood.gameScreen.GameScreen;
 
 public class RecordingState extends ScreenState {
 
@@ -36,12 +35,5 @@ public class RecordingState extends ScreenState {
 	public void step(BitSet keys) {
 		recordedKeys.add((BitSet)keys.clone());
 		screen.step(recordedKeys.get(recordedKeys.size() - 1));
-		if (recordedKeys.size() > 150) {
-			try {
-				GameScreen.get().requestScreenState(new PlaybackState(screen.getClass().newInstance(), recordedKeys));
-			} catch (InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 }

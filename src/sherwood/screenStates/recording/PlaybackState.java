@@ -1,7 +1,9 @@
-package sherwood.screenStates;
+package sherwood.screenStates.recording;
 
-import java.awt.Graphics2D;
-import java.util.BitSet;
+import sherwood.screenStates.ScreenState;
+
+import java.awt.*;
+import java.util.*;
 import java.util.List;
 
 public class PlaybackState extends ScreenState {
@@ -14,7 +16,7 @@ public class PlaybackState extends ScreenState {
 		this.screen = screen;
 		this.keys = keys;
 	}
-	
+
 	@Override
 	public void init() {
 		screen.init();

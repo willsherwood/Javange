@@ -1,51 +1,44 @@
 package sherwood.gameScreen;
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-
 import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 import sherwood.gameScreen.map.Mapping;
 import sherwood.main.Main;
 import sherwood.screenStates.ScreenState;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 public class GameScreen extends JFrame {
-	
-	public int TICKSPERSEC = 50;
+
 	public static int WIDTH = 800;
 	public static int HEIGHT = 608;
-
+	private static GameScreen game;
+	public final int DEFAULT_TICKSPERSEC = 60;
 	protected UpdateAlgorithm updateAlgorithm;
 	protected ScreenState screenState;
 	protected BufferedImage db;
 	protected Graphics2D g;
-	protected KeyboardInput kbinput;
-
+	protected KeyboardInput keyboardInput;
 	protected JComponent drawComponent;
 
-	private static GameScreen game;
+	private GameScreen (ScreenState screenState) {
+		this.screenState = screenState;
+		this.drawComponent = new DrawComponent();
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		add(drawComponent);
+		requestNewDimension(new Dimension(800, 608));
+		setVisible(true);
+
+		Thread s = new UpdateThread(this::getScreenState, this::getGraphics2D, this::getKeyboardInput, GameScreen::get, this::getUpdateAlgorithm);
+		s.start();
+	}
 	
 	public static GameScreen get() {
 		if (game == null)
 			game = new GameScreen(Main.DEFAULT_SCREENSTATE);
 		return game;
-	}
-	
-	private GameScreen(ScreenState screenState) {
-		this.screenState = screenState;
-		this.drawComponent = new DrawComponent();
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(drawComponent);
-		requestNewDimension(new Dimension(800, 608));
-		setVisible(true);
-		
-		Thread s = new UpdateThread(this::getScreenState, this::getG, this::getKbinput, GameScreen::get, this::getUpdateAlgorithm);
-		s.start();
 	}
 
 	public ScreenState getScreenState() {
@@ -56,15 +49,16 @@ public class GameScreen extends JFrame {
 		return updateAlgorithm;
 	}
 
-	public Graphics2D getG() {
+	public Graphics2D getGraphics2D () {
 		return g;
 	}
 
-	public KeyboardInput getKbinput() {
-		return kbinput;
+	public KeyboardInput getKeyboardInput () {
+		return keyboardInput;
 	}
 
 	public void paintToBuffer(Mapping map) {
+		getGraphics2D().setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Graphics2D gr = (Graphics2D) drawComponent.getGraphics();
 		gr.drawImage(map == null? db : map.map(db), 0, 0, null);
 		g.clearRect(0, 0, WIDTH, HEIGHT);
@@ -80,11 +74,9 @@ public class GameScreen extends JFrame {
 	}
 	
 	public void requestKeyInputMechanism(KeyboardInput k) {
-		this.kbinput = k;
-		drawComponent.addKeyListener(this.kbinput);
-		for (KeyListener kt : drawComponent.getKeyListeners()) {
-			System.out.println(kt);
-		}
+		drawComponent.removeKeyListener(this.keyboardInput);
+		this.keyboardInput = k;
+		drawComponent.addKeyListener(this.keyboardInput);
 	}
 	
 	public void requestNewDimension(Dimension d) {

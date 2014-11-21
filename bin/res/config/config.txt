@@ -1,9 +1,0 @@
-# controls
-Left: 37
-Up: 38
-Right: 39
-Down: 40
-Sprint: 16
-Jump: 32
-Action: 88
-Start: 27
