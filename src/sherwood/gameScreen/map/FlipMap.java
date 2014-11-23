@@ -3,9 +3,6 @@ package sherwood.gameScreen.map;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- *
- */
 public class FlipMap extends Mapping {
 
     private boolean flipX, flipY;

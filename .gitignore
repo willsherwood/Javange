@@ -1,5 +1,13 @@
-/bin
-/.idea
+*.iml
+.idea/
+bin/
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+out/
 
 # Windows image file caches
 Thumbs.db

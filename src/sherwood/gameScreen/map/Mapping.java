@@ -2,9 +2,6 @@ package sherwood.gameScreen.map;
 
 import java.awt.*;
 
-/**
- *
- */
 public abstract class Mapping {
 
     public static Image chain (Image img, Mapping... maps) {
