@@ -1,12 +1,15 @@
 package sherwood.gameScreen;
 
-import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
 import sherwood.gameScreen.map.Mapping;
+import sherwood.inputs.keyboard.KeyboardInput;
+import sherwood.iohandlers.ConfigHandler;
 import sherwood.main.Main;
 import sherwood.screenStates.ScreenState;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 public class GameScreen extends JFrame {
@@ -26,7 +29,12 @@ public class GameScreen extends JFrame {
         this.screenState = screenState;
         this.drawComponent = new DrawComponent();
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing (WindowEvent e) {
+                exit();
+            }
+        });
         add(drawComponent);
         requestNewDimension(new Dimension(800, 608));
         setVisible(true);
@@ -64,9 +72,13 @@ public class GameScreen extends JFrame {
         g.clearRect(0, 0, WIDTH, HEIGHT);
     }
 
-    public void requestScreenState (ScreenState s) {
+    public void requestScreenStateAndInit (ScreenState s) {
         this.screenState = s;
         s.init();
+    }
+
+    public void requestScreenState (ScreenState s) {
+        this.screenState = s;
     }
 
     public void requestUpdateAlgorithm (UpdateAlgorithm u) {
@@ -85,6 +97,15 @@ public class GameScreen extends JFrame {
         this.db = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         this.g = (Graphics2D) db.getGraphics();
         this.pack();
+    }
+
+    /**
+     * called on game exit
+     */
+    public void exit() {
+        System.out.println("Saving . . .");
+        ConfigHandler.saveAll();
+        System.exit(0);
     }
 
     public static final class DrawComponent extends JComponent {

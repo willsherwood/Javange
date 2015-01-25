@@ -6,14 +6,14 @@ import java.net.URL;
 
 public enum Sound {
 
-    RED("RED"), GREEN("GREEN"), BLUE("BLUE"), YELLOW("YELLOW");
+    ;
 
     public static boolean MUTE = false;
     private Clip clip;
 
     private Sound (String fileName) {
         try {
-            URL url = this.getClass().getClassLoader().getResource("res/" + fileName + ".wav");
+            URL url = this.getClass().getClassLoader().getResource("res/sound/" + fileName + ".wav");
             AudioInputStream audioInputStream = AudioSystem
                     .getAudioInputStream(url);
             clip = AudioSystem.getClip();

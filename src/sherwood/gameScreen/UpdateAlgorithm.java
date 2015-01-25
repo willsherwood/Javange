@@ -1,6 +1,6 @@
 package sherwood.gameScreen;
 
-import sherwood.gameScreen.inputs.keyboard.KeyboardInput;
+import sherwood.inputs.keyboard.KeyboardInput;
 import sherwood.screenStates.ScreenState;
 
 import java.awt.*;

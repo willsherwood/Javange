@@ -1,7 +1,7 @@
 package sherwood.screenStates.recording;
 
 import sherwood.gameScreen.GameScreen;
-import sherwood.gameScreen.inputs.keyboard.fullKeys.FullKeyboardInput;
+import sherwood.inputs.keyboard.fullKeys.FullKeyboardInput;
 import sherwood.screenStates.ScreenState;
 
 import java.awt.*;
@@ -84,6 +84,8 @@ public class RecordingWrapperState extends ScreenState {
     }
 
     public static enum STATUS {
-        RECORDING, PLAYING, WAITING
+        RECORDING,
+        PLAYING,
+        WAITING
     }
 }

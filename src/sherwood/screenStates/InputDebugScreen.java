@@ -1,7 +1,7 @@
 package sherwood.screenStates;
 
 import sherwood.gameScreen.GameScreen;
-import sherwood.gameScreen.inputs.keyboard.control.Control;
+import sherwood.inputs.keyboard.control.Control;
 
 import java.awt.*;
 import java.util.*;
@@ -9,7 +9,6 @@ import java.util.*;
 public class InputDebugScreen extends ScreenState {
 
     protected BitSet keys;
-    protected int iteration;
 
     public InputDebugScreen () {
         keys = new BitSet(0);
@@ -29,9 +28,6 @@ public class InputDebugScreen extends ScreenState {
     @Override
     public void step (BitSet keys) {
         this.keys = keys;
-        if (keys.get(Control.getCondensed(Control.ACTION))) {
-            GameScreen.get().requestNewDimension(new Dimension(GameScreen.WIDTH + 10, GameScreen.HEIGHT + 10));
-        }
     }
 
 }

@@ -2,7 +2,7 @@ package sherwood.screenStates;
 
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
-import sherwood.gameScreen.inputs.keyboard.control.ControlKeyboardInput;
+import sherwood.inputs.keyboard.control.ControlKeyboardInput;
 
 import java.awt.*;
 import java.util.*;
