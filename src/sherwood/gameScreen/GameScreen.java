@@ -35,7 +35,7 @@ public class GameScreen extends JFrame {
                 exit();
             }
         });
-        add(drawComponent);
+        getContentPane().add(drawComponent);
         requestNewDimension(new Dimension(800, 608));
         setVisible(true);
 

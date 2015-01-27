@@ -2,6 +2,7 @@ package sherwood.screenStates;
 
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
+import sherwood.inputs.keyboard.control.discrete.DiscreteControlKeyboardInput;
 
 import java.awt.*;
 import java.util.*;
@@ -12,6 +13,11 @@ public class InputDebugScreen extends ScreenState {
 
     public InputDebugScreen () {
         keys = new BitSet(0);
+    }
+
+    @Override
+    public void init () {
+        GameScreen.get().requestKeyInputMechanism(new DiscreteControlKeyboardInput());
     }
 
     @Override
