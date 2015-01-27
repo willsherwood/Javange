@@ -2,7 +2,7 @@ package sherwood.screenStates;
 
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
-import sherwood.inputs.keyboard.control.discrete.DiscreteControlKeyboardInput;
+import sherwood.inputs.keyboard.control.MixedControlKeyboardInput;
 
 import java.awt.*;
 import java.util.*;
@@ -17,7 +17,11 @@ public class InputDebugScreen extends ScreenState {
 
     @Override
     public void init () {
-        GameScreen.get().requestKeyInputMechanism(new DiscreteControlKeyboardInput());
+        BitSet mixed = new BitSet(Control.values().length);
+        Control[] continuous = {Control.LEFT, Control.RIGHT, Control.UP, Control.DOWN};
+        for (Control p : continuous)
+            mixed.set(Control.getCondensed(p), true);
+        GameScreen.get().requestKeyInputMechanism(new MixedControlKeyboardInput(mixed));
     }
 
     @Override

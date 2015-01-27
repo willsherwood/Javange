@@ -44,9 +44,6 @@ public class DiscreteControlKeyboardInput extends KeyboardInput {
 
     @Override
     public BitSet getBitSet () {
-        if (!bitSets[1].isEmpty()) {
-            System.out.println(bitSets[1].nextSetBit(0));
-        }
         BitSet out = (BitSet) bitSets[1].clone();
         bitSets[1].clear();
         return out;
