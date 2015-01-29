@@ -2,7 +2,7 @@ package sherwood.demo;
 
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
-import sherwood.inputs.keyboard.fullKeys.FullKeyboardInput;
+import sherwood.inputs.keyboard.fullKeys.FullDiscreteKeyboardInput;
 import sherwood.iohandlers.ConfigHandler;
 import sherwood.screenStates.InputDebugScreen;
 import sherwood.screenStates.ScreenState;
@@ -40,6 +40,6 @@ public class ControlSelectState extends ScreenState {
     @Override
     public void init () {
         super.init();
-        GameScreen.get().requestKeyInputMechanism(new FullKeyboardInput());
+        GameScreen.get().requestKeyInputMechanism(new FullDiscreteKeyboardInput());
     }
 }

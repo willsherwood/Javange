@@ -1,7 +1,7 @@
 package sherwood.screenStates.recording;
 
 import sherwood.gameScreen.GameScreen;
-import sherwood.inputs.keyboard.fullKeys.FullKeyboardInput;
+import sherwood.inputs.keyboard.fullKeys.FullDiscreteKeyboardInput;
 import sherwood.screenStates.ScreenState;
 
 import java.awt.*;
@@ -80,7 +80,7 @@ public class RecordingWrapperState extends ScreenState {
     @Override
     public void init () {
         super.init();
-        GameScreen.get().requestKeyInputMechanism(new FullKeyboardInput());
+        GameScreen.get().requestKeyInputMechanism(new FullDiscreteKeyboardInput());
     }
 
     public static enum STATUS {
