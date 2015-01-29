@@ -3,7 +3,6 @@ package sherwood.gameScreen;
 import sherwood.gameScreen.map.Mapping;
 import sherwood.inputs.keyboard.KeyboardInput;
 import sherwood.iohandlers.ConfigHandler;
-import sherwood.main.Main;
 import sherwood.screenStates.ScreenState;
 
 import javax.swing.*;
@@ -17,6 +16,7 @@ public class GameScreen extends JFrame {
     public static int WIDTH = 800;
     public static int HEIGHT = 608;
     private static GameScreen game;
+    private static boolean initialized;
     public final int DEFAULT_TICKSPERSEC = 60;
     protected UpdateAlgorithm updateAlgorithm;
     protected ScreenState screenState;
@@ -25,7 +25,8 @@ public class GameScreen extends JFrame {
     protected KeyboardInput keyboardInput;
     protected JComponent drawComponent;
 
-    private GameScreen (ScreenState screenState) {
+    private GameScreen (ScreenState screenState, String windowTitle) {
+        setTitle(windowTitle);
         this.screenState = screenState;
         this.drawComponent = new DrawComponent();
 
@@ -35,6 +36,7 @@ public class GameScreen extends JFrame {
                 exit();
             }
         });
+
         getContentPane().add(drawComponent);
         requestNewDimension(new Dimension(800, 608));
         setVisible(true);
@@ -44,9 +46,15 @@ public class GameScreen extends JFrame {
     }
 
     public static GameScreen get () {
-        if (game == null)
-            game = new GameScreen(Main.DEFAULT_SCREENSTATE);
         return game;
+    }
+
+    public static void start (ScreenState s, String windowTitle) {
+        if (initialized)
+            throw new RuntimeException("Game already initialized");
+        ConfigHandler.init();
+        initialized = true;
+        game = new GameScreen(s, windowTitle);
     }
 
     public ScreenState getScreenState () {
