@@ -17,7 +17,7 @@ public class GameScreen extends JFrame {
     public static int HEIGHT = 608;
     private static GameScreen game;
     private static boolean initialized;
-    public final int DEFAULT_TICKSPERSEC = 60;
+    public static final int DEFAULT_TICKSPERSEC = 60;
     protected UpdateAlgorithm updateAlgorithm;
     protected ScreenState screenState;
     protected BufferedImage db;
