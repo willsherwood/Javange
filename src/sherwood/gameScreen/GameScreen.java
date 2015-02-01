@@ -24,6 +24,7 @@ public class GameScreen extends JFrame {
     protected Graphics2D g;
     protected KeyboardInput keyboardInput;
     protected JComponent drawComponent;
+    protected Thread updateThread;
 
     private GameScreen (ScreenState screenState, String windowTitle) {
         setTitle(windowTitle);
@@ -41,8 +42,8 @@ public class GameScreen extends JFrame {
         requestNewDimension(new Dimension(800, 608));
         setVisible(true);
 
-        Thread s = new UpdateThread(this::getScreenState, this::getGraphics2D, this::getKeyboardInput, GameScreen::get, this::getUpdateAlgorithm);
-        s.start();
+        updateThread = new UpdateThread(this::getScreenState,
+            this::getGraphics2D, this::getKeyboardInput, GameScreen::get, this::getUpdateAlgorithm);
     }
 
     public static GameScreen get () {
@@ -55,6 +56,7 @@ public class GameScreen extends JFrame {
         ConfigHandler.init();
         initialized = true;
         game = new GameScreen(s, windowTitle);
+        game.updateThread.start();
     }
 
     public ScreenState getScreenState () {
