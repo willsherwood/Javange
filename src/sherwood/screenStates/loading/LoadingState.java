@@ -1,6 +1,7 @@
 package sherwood.screenStates.loading;
 
 import sherwood.gameScreen.GameScreen;
+import sherwood.inputs.keyboard.control.Control;
 import sherwood.screenStates.ScreenState;
 
 import java.awt.*;
@@ -25,7 +26,7 @@ public class LoadingState extends ScreenState {
     }
 
     @Override
-    public void step (BitSet keys) {
+    public void step (EnumSet<Control> keys) {
     }
 
     @Override

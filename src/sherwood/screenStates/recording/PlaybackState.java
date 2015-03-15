@@ -1,5 +1,6 @@
 package sherwood.screenStates.recording;
 
+import sherwood.inputs.keyboard.control.Control;
 import sherwood.screenStates.ScreenState;
 
 import java.awt.*;
@@ -9,10 +10,10 @@ import java.util.List;
 public class PlaybackState extends ScreenState {
 
     protected ScreenState screen;
-    protected List<BitSet> keys;
+    protected List<EnumSet<Control>> keys;
     protected int index;
 
-    public PlaybackState (ScreenState screen, List<BitSet> keys) {
+    public PlaybackState (ScreenState screen, List<EnumSet<Control>> keys) {
         this.screen = screen;
         this.keys = keys;
     }
@@ -29,7 +30,7 @@ public class PlaybackState extends ScreenState {
     }
 
     @Override
-    public void step (BitSet keys) {
+    public void step (EnumSet<Control> keys) {
         if (index < this.keys.size())
             screen.step(this.keys.get(index++));
     }

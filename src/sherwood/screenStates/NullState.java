@@ -1,5 +1,7 @@
 package sherwood.screenStates;
 
+import sherwood.inputs.keyboard.control.Control;
+
 import java.awt.*;
 import java.util.*;
 
@@ -16,7 +18,7 @@ public class NullState extends ScreenState {
     }
 
     @Override
-    public void step (BitSet keys) {
+    public void step (EnumSet<Control> keys) {
 
     }
 

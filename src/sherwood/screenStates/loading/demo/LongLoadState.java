@@ -1,5 +1,6 @@
 package sherwood.screenStates.loading.demo;
 
+import sherwood.inputs.keyboard.control.Control;
 import sherwood.screenStates.ScreenState;
 
 import java.awt.*;
@@ -23,7 +24,7 @@ public class LongLoadState extends ScreenState {
     }
 
     @Override
-    public void step (BitSet keys) {
+    public void step (EnumSet<Control> keys) {
 
     }
 }

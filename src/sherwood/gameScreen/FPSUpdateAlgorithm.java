@@ -34,7 +34,7 @@ public class FPSUpdateAlgorithm implements UpdateAlgorithm {
     public void update (ScreenState screenState, Graphics2D graphics,
                         GameScreen gameScreen, KeyboardInput input) {
         t1 = System.currentTimeMillis();
-        screenState.step(input.getBitSet());
+        screenState.step(input.keys());
         screenState.draw(graphics);
         gameScreen.paintToBuffer(map);
         graphics.setColor(Color.WHITE);

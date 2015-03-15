@@ -1,34 +1,28 @@
 package sherwood.inputs.keyboard.control;
 
 import sherwood.inputs.keyboard.KeyboardInput;
-import sherwood.inputs.keyboard.control.continuous.ContinuousControlKeyboardInput;
-import sherwood.inputs.keyboard.control.discrete.DiscreteControlKeyboardInput;
+import sherwood.inputs.keyboard.control.continuous.ContinuousKeyboardInput;
+import sherwood.inputs.keyboard.control.discrete.DiscreteKeyboardInput;
 
 import java.awt.event.KeyEvent;
 import java.util.*;
 
 public class MixedControlKeyboardInput extends KeyboardInput {
 
-    protected BitSet keys;
-    protected KeyboardInput continuous;
-    protected KeyboardInput discrete;
+    private KeyboardInput continuous;
+    private KeyboardInput discrete;
+    private EnumSet<Control> continuousKeys;
 
-    /**
-     * constructs a keyboard input with the availability of both continuous and discrete
-     * keys. A true value in the control bit set means the key is continuous.
-     */
-    public MixedControlKeyboardInput (BitSet keys) {
-        this.keys = keys;
-        this.continuous = new ContinuousControlKeyboardInput();
-        this.discrete = new DiscreteControlKeyboardInput();
+    public MixedControlKeyboardInput(EnumSet<Control> continuousKeys) {
+        this.continuousKeys = continuousKeys;
+        continuous = new ContinuousKeyboardInput();
+        discrete = new DiscreteKeyboardInput();
     }
 
     @Override
     public void keyPressed (KeyEvent e) {
-        int k = Control.getCondensed(ControlMap.getControl(e.getKeyCode()));
-        if (k < 0)
-            return;
-        if (keys.get(k))
+        Control control = ControlMap.getControl(e.getKeyCode());
+        if (continuousKeys.contains(control))
             continuous.keyPressed(e);
         else
             discrete.keyPressed(e);
@@ -36,21 +30,18 @@ public class MixedControlKeyboardInput extends KeyboardInput {
 
     @Override
     public void keyReleased (KeyEvent e) {
-        continuous.keyReleased(e);
-        discrete.keyReleased(e);
+        Control control = ControlMap.getControl(e.getKeyCode());
+        if (continuousKeys.contains(control))
+            continuous.keyReleased(e);
+        else
+            discrete.keyReleased(e);
     }
 
     @Override
-    public BitSet getBitSet () {
-        BitSet out = new BitSet(Control.values().length);
-        BitSet disc = discrete.getBitSet();
-        BitSet cont = continuous.getBitSet();
-        for (int i = 0; i < Control.values().length; i++) {
-            if (keys.get(i))
-                out.set(i, cont.get(i));
-            else
-                out.set(i, disc.get(i));
-        }
+    public EnumSet<Control> keys () {
+        EnumSet<Control> out = EnumSet.noneOf(Control.class);
+        out.addAll(continuous.keys());
+        out.addAll(discrete.keys());
         return out;
     }
 }

@@ -7,12 +7,12 @@ import sherwood.inputs.keyboard.control.ControlMap;
 import java.awt.event.KeyEvent;
 import java.util.*;
 
-public class ContinuousControlKeyboardInput extends KeyboardInput {
+public class ContinuousKeyboardInput extends KeyboardInput {
 
-    protected BitSet bitset;
+    protected EnumSet<Control> keys;
 
-    public ContinuousControlKeyboardInput () {
-        bitset = new BitSet(Control.values().length);
+    public ContinuousKeyboardInput () {
+        keys = EnumSet.noneOf(Control.class);
     }
 
     @Override
@@ -26,15 +26,15 @@ public class ContinuousControlKeyboardInput extends KeyboardInput {
     }
 
     public void set (int i, boolean j) {
-        int k = Control.getCondensed(ControlMap.getControl(i));
-        if (k < 0)
-            return;
-        bitset.set(k, j);
+        if (j)
+            keys.add(ControlMap.getControl(i));
+        else
+            keys.remove(ControlMap.getControl(i));
     }
 
     @Override
-    public BitSet getBitSet () {
-        return bitset;
+    public EnumSet<Control> keys () {
+        return keys;
     }
 
 }
