@@ -1,6 +1,6 @@
 
-A:65
-B:83
+A:16
+B:90
 DOWN:40
 LEFT:37
 LTRIG:71

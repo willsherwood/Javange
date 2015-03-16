@@ -41,9 +41,8 @@ public class Player implements Collider, Stepper, Mover {
         if (entity instanceof Block) {
             if (movement.bounds().over(movement.velocity().zx().negate()).intersects(entity.bounds())) {
                 // would have collided with the block even if we weren't moving horizontally
-                movement.verticalCollision(entity);
+                movement.horizontalCollision(entity);
             } else {
-                // vertical collision
                 movement.verticalCollision(entity);
             }
         }
