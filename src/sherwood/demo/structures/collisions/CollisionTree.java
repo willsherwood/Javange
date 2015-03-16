@@ -1,8 +1,8 @@
 package sherwood.demo.structures.collisions;
 
 import sherwood.demo.physics.BoundingBox;
-import sherwood.demo.physics.Collider;
-import sherwood.demo.physics.Entity;
+import sherwood.demo.entities.Collider;
+import sherwood.demo.entities.Entity;
 import sherwood.demo.states.graphics.BoxArtist;
 import sherwood.demo.structures.QuadTree;
 import sherwood.demo.structures.UnorderedPair;

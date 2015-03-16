@@ -1,8 +1,8 @@
 package sherwood.demo.states;
 
-import sherwood.demo.physics.Collider;
-import sherwood.demo.physics.Entity;
-import sherwood.demo.physics.Stepper;
+import sherwood.demo.entities.Collider;
+import sherwood.demo.entities.Entity;
+import sherwood.demo.entities.Stepper;
 import sherwood.demo.physics.Vector;
 import sherwood.demo.entities.player.Player;
 import sherwood.demo.states.graphics.BoxArtist;

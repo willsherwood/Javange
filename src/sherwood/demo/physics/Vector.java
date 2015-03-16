@@ -44,4 +44,18 @@ public class Vector {
     public int yc () {
         return (int) y;
     }
+
+    /**
+     * @return a new vector with delta-x dx
+     */
+    public Vector dx(double dx) {
+        return new Vector(x + dx, y);
+    }
+
+    /**
+     * @return a new vector with delta-y dy
+     */
+    public Vector dy(double dy) {
+        return new Vector(x, y + dy);
+    }
 }

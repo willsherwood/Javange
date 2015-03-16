@@ -1,4 +1,6 @@
-package sherwood.demo.physics;
+package sherwood.demo.entities;
+
+import sherwood.demo.physics.BoundingBox;
 
 public interface Entity {
     /**

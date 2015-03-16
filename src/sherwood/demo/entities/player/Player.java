@@ -1,22 +1,38 @@
 package sherwood.demo.entities.player;
 
-import sherwood.demo.physics.*;
+import sherwood.demo.entities.Collider;
+import sherwood.demo.entities.Entity;
+import sherwood.demo.entities.Mover;
+import sherwood.demo.entities.Stepper;
+import sherwood.demo.physics.BoundingBox;
+import sherwood.demo.physics.Vector;
 import sherwood.inputs.keyboard.control.Control;
 
-import java.awt.Color;
 import java.util.EnumSet;
 
-public class Player implements Entity, Collider, Stepper {
+public class Player implements Collider, Stepper, Mover {
 
     private static final Vector size = new Vector(5, 5);
-    private Color color;
+    private PlayerMovement movement;
 
     private BoundingBox bounds;
 
     public Player (Vector start) {
         bounds = new BoundingBox(start, size);
-        this.color = Color.WHITE;
+        movement = new PlayerMovement();
     }
+
+    @Override
+    public void step (EnumSet<Control> keys) {
+        for (Control c : keys)
+            movement.step(c);
+    }
+
+    @Override
+    public Vector velocity () {
+        return movement.velocity();
+    }
+
 
     @Override
     public BoundingBox bounds () {
@@ -25,22 +41,6 @@ public class Player implements Entity, Collider, Stepper {
 
     @Override
     public void collide (Entity entity) {
-        this.color = Color.RED;
-    }
 
-    @Override
-    public void step (EnumSet<Control> keys) {
-        if (keys.contains(Control.LEFT))
-            bounds = bounds.over(new Vector(-4, 0));
-        if (keys.contains(Control.RIGHT))
-            bounds = bounds.over(new Vector(4, 0));
-        if (keys.contains(Control.UP))
-            bounds = bounds.over(new Vector(0, -4));
-        if (keys.contains(Control.DOWN))
-            bounds = bounds.over(new Vector(0, 4));
-    }
-
-    public Color color () {
-        return color;
     }
 }

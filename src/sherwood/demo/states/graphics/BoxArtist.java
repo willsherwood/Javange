@@ -1,6 +1,6 @@
 package sherwood.demo.states.graphics;
 
-import sherwood.demo.physics.Entity;
+import sherwood.demo.entities.Entity;
 import sherwood.demo.entities.player.Player;
 import sherwood.demo.structures.collisions.ArtStyle;
 

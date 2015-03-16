@@ -1,6 +1,6 @@
 package sherwood.demo.structures;
 
-import sherwood.demo.physics.Entity;
+import sherwood.demo.entities.Entity;
 
 import java.util.Set;
 
