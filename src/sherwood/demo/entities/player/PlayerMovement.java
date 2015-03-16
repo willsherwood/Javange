@@ -18,23 +18,23 @@ public class PlayerMovement {
 
     private int jumps = 0;
 
-    private static final Vector size = new Vector(5, 5);
+    private static final Vector size = new Vector(10, 20);
 
     public PlayerMovement(Vector start) {
         actions = new EnumMap<>(Control.class);
         velocity = Vector.ZERO;
-        actions.put(Control.LEFT, () -> velocity = velocity.sx(-4));
-        actions.put(Control.RIGHT, () -> velocity = velocity.sx(4));
+        actions.put(Control.LEFT, () -> velocity = velocity.sx(-3));
+        actions.put(Control.RIGHT, () -> velocity = velocity.sx(3));
         actions.put(Control.A, () -> {
-            if (++jumps <= 20000000)
-                velocity = velocity.sy(-10);
+            if (++jumps <= 2)
+                velocity = velocity.sy(-8.5);
         });
         position = start;
     }
 
     public void step(EnumSet<Control> controls) {
         velocity = velocity.sx(0);
-        velocity = velocity.dy(.1).cy(4);
+        velocity = velocity.dy(.4).cy(8);
         controls.forEach(a -> actions.getOrDefault(a, () -> {
         }).go());
     }
@@ -44,7 +44,7 @@ public class PlayerMovement {
     }
 
     public void verticalCollision(Entity entity) {
-        if (velocity.y() > 0) {
+        if (velocity.y() >= 0) {
             position = new Vector(position.x(), entity.bounds().position().y() - bounds().height());
             velocity = velocity.sy(0);
             jumps = 0;

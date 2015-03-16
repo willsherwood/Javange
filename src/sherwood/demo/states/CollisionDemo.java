@@ -11,49 +11,51 @@ import sherwood.demo.structures.CollisionFactory;
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
-import sherwood.inputs.keyboard.control.MixedControlKeyboardInput;
+import sherwood.inputs.keyboard.control.MixedKeyboardInput;
 import sherwood.screenStates.ScreenState;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CollisionDemo extends ScreenState {
 
+    private Player player;
     private Set<Entity> entities;
     private CollisionFactory factory;
 
-    public CollisionDemo() {
+    public CollisionDemo () {
         entities = new HashSet<>();
-        entities.add(new Player(new Vector(100, 300)));
-        entities.add(new Block(new Vector(100, 400), new Vector(400, 64)));
-        entities.add(new Block(new Vector(100, 200), new Vector(400, 64)));
-        entities.add(new Block(new Vector(0, 0), new Vector(GameScreen.WIDTH, 20)));
-        entities.add(new Block(new Vector(0, GameScreen.HEIGHT - 20), new Vector(GameScreen.WIDTH, 20)));
-        entities.add(new Block(new Vector(0, 0), new Vector(20, GameScreen.HEIGHT)));
-        entities.add(new Block(new Vector(GameScreen.WIDTH - 20, 0), new Vector(20, GameScreen.HEIGHT)));
-
+        player = new Player(new Vector(100, 300));
+        entities.add(player);
+        for (int x = 0; x < GameScreen.WIDTH; x += 32)
+            if (Math.random() > 0.4) {
+                entities.add(new Block(new Vector(x, GameScreen.HEIGHT - 64), new Vector(64, 64)));
+                x += 32;
+            } else if (Math.random() > 0.6)
+                entities.add(new Block(new Vector(x, GameScreen.HEIGHT - 32), new Vector(32, 32)));
 
         factory = new CollisionFactory();
     }
 
     @Override
-    public void init() {
+    public void init () {
         EnumSet<Control> continuousKeys = EnumSet.of(Control.LEFT, Control.RIGHT, Control.UP, Control.DOWN);
-        GameScreen.get().requestKeyInputMechanism(new MixedControlKeyboardInput(continuousKeys));
+        GameScreen.get().requestKeyInputMechanism(new MixedKeyboardInput(continuousKeys));
         GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm());
     }
 
     @Override
-    public void draw(Graphics2D g) {
+    public void draw (Graphics2D g) {
         BoxArtist artist = new BoxArtist(g);
         entities.forEach(artist::draw);
         factory.draw(g);
+        g.drawString(player.bounds().position().toString(), 20, 40);
     }
 
     @Override
-    public void step(EnumSet<Control> keys) {
+    public void step (EnumSet<Control> keys) {
         if (keys.contains(Control.START)) {
             entities.add(new Player(new Vector((int) (Math.random() * GameScreen.WIDTH), (int) (Math.random() * GameScreen.HEIGHT))));
         }

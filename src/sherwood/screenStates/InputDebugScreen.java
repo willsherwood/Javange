@@ -3,7 +3,7 @@ package sherwood.screenStates;
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
-import sherwood.inputs.keyboard.control.MixedControlKeyboardInput;
+import sherwood.inputs.keyboard.control.MixedKeyboardInput;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -20,7 +20,7 @@ public class InputDebugScreen extends ScreenState {
     @Override
     public void init () {
         EnumSet<Control> continuous = EnumSet.of(Control.UP, Control.DOWN, Control.LEFT, Control.RIGHT);
-        GameScreen.get().requestKeyInputMechanism(new MixedControlKeyboardInput(continuous));
+        GameScreen.get().requestKeyInputMechanism(new MixedKeyboardInput(continuous));
         GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm());
     }
 

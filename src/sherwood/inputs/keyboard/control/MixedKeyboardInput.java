@@ -7,13 +7,13 @@ import sherwood.inputs.keyboard.control.discrete.DiscreteKeyboardInput;
 import java.awt.event.KeyEvent;
 import java.util.EnumSet;
 
-public class MixedControlKeyboardInput extends KeyboardInput {
+public class MixedKeyboardInput extends KeyboardInput {
 
     private KeyboardInput continuous;
     private KeyboardInput discrete;
     private EnumSet<Control> continuousKeys;
 
-    public MixedControlKeyboardInput (EnumSet<Control> continuousKeys) {
+    public MixedKeyboardInput (EnumSet<Control> continuousKeys) {
         this.continuousKeys = continuousKeys;
         continuous = new ContinuousKeyboardInput();
         discrete = new DiscreteKeyboardInput();

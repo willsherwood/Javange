@@ -42,9 +42,14 @@ public class Player implements Collider, Stepper, Mover {
             if (movement.bounds().over(movement.velocity().zx().negate()).intersects(entity.bounds())) {
                 // would have collided with the block even if we weren't moving horizontally
                 movement.horizontalCollision(entity);
+                System.out.println("horiz");
             } else {
                 movement.verticalCollision(entity);
             }
         }
+    }
+
+    public void finalizeCollisions() {
+
     }
 }
