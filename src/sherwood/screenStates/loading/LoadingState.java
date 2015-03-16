@@ -4,8 +4,8 @@ import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
 import sherwood.screenStates.ScreenState;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Graphics2D;
+import java.util.EnumSet;
 
 public class LoadingState extends ScreenState {
 

@@ -4,25 +4,26 @@ import sherwood.gameScreen.map.Mapping;
 import sherwood.inputs.keyboard.KeyboardInput;
 import sherwood.screenStates.ScreenState;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 public class FPSUpdateAlgorithm implements UpdateAlgorithm {
 
+    private final int fps;
     private Mapping map;
     private double time;
     private double weight = 0.1;
     private long t1, t2;
-    private final int fps;
 
     public FPSUpdateAlgorithm (int fps) {
         this.fps = fps;
     }
 
-    public FPSUpdateAlgorithm() {
+    public FPSUpdateAlgorithm () {
         this(GameScreen.DEFAULT_TICKSPERSEC);
     }
 
-    public void setMap(Mapping map) {
+    public void setMap (Mapping map) {
         this.map = map;
     }
 

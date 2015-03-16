@@ -5,8 +5,8 @@ import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
 import sherwood.inputs.keyboard.control.continuous.ContinuousKeyboardInput;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Graphics2D;
+import java.util.EnumSet;
 
 public abstract class ScreenState {
 

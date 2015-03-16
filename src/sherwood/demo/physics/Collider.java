@@ -1,10 +1,8 @@
 package sherwood.demo.physics;
 
-@FunctionalInterface
-public interface Collider {
-
+public interface Collider extends Entity {
     /**
      * an object that should trigger an effect when it collides with something else
      */
-    void collide(Entity entity);
+    void collide (Entity entity);
 }

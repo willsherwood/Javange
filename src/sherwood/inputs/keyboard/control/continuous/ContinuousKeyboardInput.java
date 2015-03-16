@@ -5,7 +5,7 @@ import sherwood.inputs.keyboard.control.Control;
 import sherwood.inputs.keyboard.control.ControlMap;
 
 import java.awt.event.KeyEvent;
-import java.util.*;
+import java.util.EnumSet;
 
 public class ContinuousKeyboardInput extends KeyboardInput {
 

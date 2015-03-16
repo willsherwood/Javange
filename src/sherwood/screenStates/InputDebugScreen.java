@@ -5,8 +5,9 @@ import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
 import sherwood.inputs.keyboard.control.MixedControlKeyboardInput;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.util.EnumSet;
 
 public class InputDebugScreen extends ScreenState {
 

@@ -5,19 +5,22 @@ import sherwood.inputs.keyboard.KeyboardInput;
 import sherwood.iohandlers.ConfigHandler;
 import sherwood.screenStates.ScreenState;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 public class GameScreen extends JFrame {
 
+    public static final int DEFAULT_TICKSPERSEC = 60;
     public static int WIDTH = 800;
     public static int HEIGHT = 608;
     private static GameScreen game;
     private static boolean initialized;
-    public static final int DEFAULT_TICKSPERSEC = 60;
     protected UpdateAlgorithm updateAlgorithm;
     protected ScreenState screenState;
     protected BufferedImage db;
@@ -43,7 +46,7 @@ public class GameScreen extends JFrame {
         setVisible(true);
 
         updateThread = new UpdateThread(this::getScreenState,
-            this::getGraphics2D, this::getKeyboardInput, GameScreen::get, this::getUpdateAlgorithm);
+                this::getGraphics2D, this::getKeyboardInput, GameScreen::get, this::getUpdateAlgorithm);
     }
 
     public static GameScreen get () {
@@ -112,7 +115,7 @@ public class GameScreen extends JFrame {
     /**
      * called on game exit
      */
-    public void exit() {
+    public void exit () {
         System.out.println("Saving . . .");
         ConfigHandler.saveAll();
         System.exit(0);

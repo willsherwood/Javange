@@ -2,8 +2,8 @@ package sherwood.inputs;
 
 import sherwood.inputs.keyboard.control.Control;
 
-import java.util.*;
+import java.util.EnumSet;
 
 public interface Input {
-    public abstract EnumSet<Control> keys();
+    public abstract EnumSet<Control> keys ();
 }

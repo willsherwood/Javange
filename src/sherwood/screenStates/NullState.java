@@ -2,8 +2,9 @@ package sherwood.screenStates;
 
 import sherwood.inputs.keyboard.control.Control;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.util.EnumSet;
 
 public class NullState extends ScreenState {
 

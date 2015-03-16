@@ -2,7 +2,8 @@ package sherwood.inputs.keyboard.control;
 
 import sherwood.iohandlers.ConfigHandler;
 
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ControlMap {
 

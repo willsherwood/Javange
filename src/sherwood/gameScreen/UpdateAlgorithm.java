@@ -3,7 +3,7 @@ package sherwood.gameScreen;
 import sherwood.inputs.keyboard.KeyboardInput;
 import sherwood.screenStates.ScreenState;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 
 public interface UpdateAlgorithm {
 

@@ -3,8 +3,8 @@ package sherwood.screenStates.recording;
 import sherwood.inputs.keyboard.control.Control;
 import sherwood.screenStates.ScreenState;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Graphics2D;
+import java.util.EnumSet;
 import java.util.List;
 
 public class PlaybackState extends ScreenState {

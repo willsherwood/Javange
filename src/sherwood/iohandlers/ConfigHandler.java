@@ -1,13 +1,13 @@
 package sherwood.iohandlers;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ConfigHandler {
 
