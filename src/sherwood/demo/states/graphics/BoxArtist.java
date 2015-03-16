@@ -1,10 +1,8 @@
 package sherwood.demo.states.graphics;
 
 import sherwood.demo.entities.Entity;
-import sherwood.demo.entities.player.Player;
 import sherwood.demo.structures.collisions.ArtStyle;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class BoxArtist {
@@ -22,10 +20,6 @@ public class BoxArtist {
     }
 
     public void draw (Entity entity) {
-        if (entity instanceof Player)
-            graphics.setColor(Color.RED);
-        else
-            graphics.setColor(Color.WHITE);
         if (style == ArtStyle.FILL)
             graphics.fillRect(entity.bounds().position().xc(),
                     entity.bounds().position().yc(),

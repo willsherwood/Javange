@@ -15,28 +15,28 @@ public class PlayerMovement {
     private Map<Control, Disposable> actions;
     private Vector velocity;
     private Vector position;
+    private Jumper jumper;
 
-    private int jumps = 0;
-
-    private static final Vector size = new Vector(10, 20);
+    private static final Vector size = new Vector(11, 21);
 
     public PlayerMovement(Vector start) {
         actions = new EnumMap<>(Control.class);
         velocity = Vector.ZERO;
         actions.put(Control.LEFT, () -> velocity = velocity.sx(-3));
         actions.put(Control.RIGHT, () -> velocity = velocity.sx(3));
-        actions.put(Control.A, () -> {
-            if (++jumps <= 2)
-                velocity = velocity.sy(-8.5);
-        });
         position = start;
+        jumper = new Jumper(this);
     }
 
     public void step(EnumSet<Control> controls) {
         velocity = velocity.sx(0);
-        velocity = velocity.dy(.4).cy(8);
-        controls.forEach(a -> actions.getOrDefault(a, () -> {
-        }).go());
+        velocity = velocity.dy(.3).cy(9);
+        controls.forEach(a -> actions.getOrDefault(a, () -> {}).go());
+        if (controls.contains(Control.A)) {
+            jumper.jump();
+        } else {
+            jumper.stop();
+        }
     }
 
     public Vector velocity() {
@@ -47,7 +47,7 @@ public class PlayerMovement {
         if (velocity.y() >= 0) {
             position = new Vector(position.x(), entity.bounds().position().y() - bounds().height());
             velocity = velocity.sy(0);
-            jumps = 0;
+            jumper.reset();
             return;
         }
         position = new Vector(position.x(), entity.bounds().position().y() + entity.bounds().height());
@@ -70,5 +70,12 @@ public class PlayerMovement {
 
     public void addVelocity() {
         position = position.over(velocity);
+    }
+
+    /**
+     * changes this.velocity to velocity
+     */
+    public void changeVelocity(Vector velocity) {
+        this.velocity = velocity;
     }
 }

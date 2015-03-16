@@ -27,6 +27,10 @@ public class CollisionDemo extends ScreenState {
 
     public CollisionDemo () {
         entities = new HashSet<>();
+        makeDemo();
+    }
+
+    private void makeDemo() {
         player = new Player(new Vector(100, 300));
         entities.add(player);
         for (int x = 0; x < GameScreen.WIDTH; x += 32)
@@ -35,13 +39,16 @@ public class CollisionDemo extends ScreenState {
                 x += 32;
             } else if (Math.random() > 0.6)
                 entities.add(new Block(new Vector(x, GameScreen.HEIGHT - 32), new Vector(32, 32)));
+        entities.add(new Block(new Vector(0, GameScreen.HEIGHT - 32), new Vector(32, 32)));
+        entities.add(new Block(new Vector(0, GameScreen.HEIGHT - 128), new Vector(16, 96)));
+
 
         factory = new CollisionFactory();
     }
 
     @Override
     public void init () {
-        EnumSet<Control> continuousKeys = EnumSet.of(Control.LEFT, Control.RIGHT, Control.UP, Control.DOWN);
+        EnumSet<Control> continuousKeys = EnumSet.of(Control.LEFT, Control.RIGHT, Control.UP, Control.DOWN, Control.A);
         GameScreen.get().requestKeyInputMechanism(new MixedKeyboardInput(continuousKeys));
         GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm());
     }
@@ -52,16 +59,17 @@ public class CollisionDemo extends ScreenState {
         entities.forEach(artist::draw);
         factory.draw(g);
         g.drawString(player.bounds().position().toString(), 20, 40);
+        g.drawString(player.velocity().toString(), 20, 65);
+
     }
 
     @Override
     public void step (EnumSet<Control> keys) {
-        if (keys.contains(Control.START)) {
-            entities.add(new Player(new Vector((int) (Math.random() * GameScreen.WIDTH), (int) (Math.random() * GameScreen.HEIGHT))));
-        }
-        if (keys.contains(Control.UP)) {
-            for (int i = 0; i < 25; i++)
-                entities.add(new Player(new Vector((int) (Math.random() * GameScreen.WIDTH), (int) (Math.random() * GameScreen.HEIGHT))));
+        if (keys.contains(Control.SELECT)) {
+            // restart
+            entities.clear();
+            makeDemo();
+            return;
         }
         entities.stream().filter(a -> a instanceof Stepper).forEach(b -> ((Stepper) b).step(keys));
         factory.collisions(entities).forEach(a -> {
