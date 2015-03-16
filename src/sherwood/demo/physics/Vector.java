@@ -2,6 +2,8 @@ package sherwood.demo.physics;
 
 public class Vector {
 
+    public static final Vector ZERO = new Vector(0, 0);
+
     private final double x;
     private final double y;
 
@@ -57,5 +59,37 @@ public class Vector {
      */
     public Vector dy(double dy) {
         return new Vector(x, y + dy);
+    }
+
+    public Vector negate () {
+        return new Vector(-x, -y);
+    }
+
+    /**
+     * @return a vector with the x zeroed (zeroed-x)
+     */
+    public Vector zx() {
+        return new Vector(0, y);
+    }
+
+    /**
+     * @return a vector with the y zeroed (zeroed-y)
+     */
+    public Vector zy() {
+        return new Vector(x, 0);
+    }
+
+    /**
+     * @return a vector with its x set to x (set-x)
+     */
+    public Vector sx(double x) {
+        return new Vector(x, y);
+    }
+
+    /**
+     * @return a vector with its x set to x (set-x)
+     */
+    public Vector sy(double y) {
+        return new Vector(x, y);
     }
 }

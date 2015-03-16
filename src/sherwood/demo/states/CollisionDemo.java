@@ -24,8 +24,6 @@ public class CollisionDemo extends ScreenState {
     public CollisionDemo () {
         entities = new HashSet<>();
         entities.add(new Player(new Vector(100, 200)));
-        entities.add(new Player(new Vector(400, 100)));
-        entities.add(new Player(new Vector(37, 57)));
         factory = new CollisionFactory();
     }
 

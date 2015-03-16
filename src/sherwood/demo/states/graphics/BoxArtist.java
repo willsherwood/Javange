@@ -1,7 +1,6 @@
 package sherwood.demo.states.graphics;
 
 import sherwood.demo.entities.Entity;
-import sherwood.demo.entities.player.Player;
 import sherwood.demo.structures.collisions.ArtStyle;
 
 import java.awt.Graphics;
@@ -21,8 +20,6 @@ public class BoxArtist {
     }
 
     public void draw (Entity entity) {
-        if (entity instanceof Player)
-            graphics.setColor(((Player) entity).color());
         if (style == ArtStyle.FILL)
             graphics.fillRect(entity.bounds().position().xc(),
                     entity.bounds().position().yc(),
