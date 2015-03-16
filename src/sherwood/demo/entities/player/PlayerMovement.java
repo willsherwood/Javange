@@ -28,6 +28,7 @@ public class PlayerMovement {
 
     public void step (EnumSet<Control> controls) {
         velocity = velocity.sx(0);
+        velocity = velocity.dy(.1).cy(4);
         controls.forEach(a -> actions.getOrDefault(a, () -> {}).go());
     }
 
@@ -37,7 +38,8 @@ public class PlayerMovement {
 
     public void verticalCollision (Entity entity) {
         // TODO: only works for negative y-velocity
-        position = entity.bounds().position().over(new Vector(0, -entity.bounds().height()));
+        position = new Vector(position.x(), entity.bounds().position().y() - size.y());
+        velocity = velocity.sy(0);
     }
 
     public BoundingBox bounds () {

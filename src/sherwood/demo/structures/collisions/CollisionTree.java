@@ -61,7 +61,7 @@ public class CollisionTree implements QuadTree {
             copy.remove(a);
             copy.forEach(Q -> {
                 if (Q.bounds().intersects(a.bounds()))
-                    collisions.add(new UnorderedPair<>(Q, a));
+                    collisions.add(new UnorderedPair<>(a, Q));
             });
         });
         children.ifPresent(a -> {

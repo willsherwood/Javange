@@ -92,4 +92,18 @@ public class Vector {
     public Vector sy(double y) {
         return new Vector(x, y);
     }
+
+    /**
+     * @return a vector with its y capped to the absolute value of y
+     */
+    public Vector cy(double y) {
+        return new Vector(x, Math.abs(this.y) > Math.abs(y) ? Math.signum(this.y) * y : this.y);
+    }
+
+    /**
+     * @return a vector with its x capped to the absolute value of x
+     */
+    public Vector cx(double x) {
+        return new Vector(Math.abs(this.x) > Math.abs(x) ? Math.signum(this.x) * x : this.x, y);
+    }
 }

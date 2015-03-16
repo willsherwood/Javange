@@ -3,6 +3,7 @@ package sherwood.demo.states;
 import sherwood.demo.entities.Collider;
 import sherwood.demo.entities.Entity;
 import sherwood.demo.entities.Stepper;
+import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.physics.Vector;
 import sherwood.demo.entities.player.Player;
 import sherwood.demo.states.graphics.BoxArtist;
@@ -24,6 +25,7 @@ public class CollisionDemo extends ScreenState {
     public CollisionDemo () {
         entities = new HashSet<>();
         entities.add(new Player(new Vector(100, 200)));
+        entities.add(new Block(new Vector(100, 400), new Vector(400, 64)));
         factory = new CollisionFactory();
     }
 
