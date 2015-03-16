@@ -19,7 +19,14 @@ import java.util.Set;
  */
 public class CollisionTree implements QuadTree {
 
+    /**
+     * How many entities this tree can store before it splits
+     */
     public static final int BUCKET_CAPACITY = 12;
+
+    /**
+     * The minimum width that a tree will split into
+     */
     public static final int MINIMUM_WIDTH = 8;
 
     private BoundingBox bounds;
@@ -85,6 +92,11 @@ public class CollisionTree implements QuadTree {
         for (QuadTree tree : children.get())
             out |= tree.insert(entity);
         return out;
+    }
+
+    public void wipe() {
+        children = Optional.empty();
+        entities.clear();
     }
 
     public void draw (Graphics2D g) {

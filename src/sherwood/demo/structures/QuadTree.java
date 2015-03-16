@@ -18,4 +18,9 @@ public interface QuadTree {
      * in no specific order, (a, b) will be returned but not (b, a).
      */
     Set<UnorderedPair<Entity>> collidingPairs ();
+
+    /**
+     * clear the tree
+     */
+    void wipe();
 }

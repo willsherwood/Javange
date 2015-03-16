@@ -1,4 +1,4 @@
-package sherwood.demo.player;
+package sherwood.demo.entities.player;
 
 import sherwood.demo.physics.*;
 import sherwood.inputs.keyboard.control.Control;
@@ -8,7 +8,7 @@ import java.util.EnumSet;
 
 public class Player implements Entity, Collider, Stepper {
 
-    private static final Vector size = new Vector(4, 7);
+    private static final Vector size = new Vector(5, 5);
     private Color color;
 
     private BoundingBox bounds;
