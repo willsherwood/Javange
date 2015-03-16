@@ -3,8 +3,10 @@ package sherwood.demo.states;
 import sherwood.demo.entities.Collider;
 import sherwood.demo.entities.Entity;
 import sherwood.demo.entities.Stepper;
+import sherwood.demo.entities.baddies.MovingBaddie;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.entities.player.Player;
+import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Vector;
 import sherwood.demo.states.graphics.FillArtist;
 import sherwood.demo.states.graphics.PlayerArtist;
@@ -42,7 +44,7 @@ public class CollisionDemo extends ScreenState {
                 entities.add(new Block(new Vector(x, GameScreen.HEIGHT - 32), new Vector(32, 32)));
         entities.add(new Block(new Vector(0, GameScreen.HEIGHT - 32), new Vector(32, 32)));
         entities.add(new Block(new Vector(0, GameScreen.HEIGHT - 128), new Vector(16, 96)));
-
+        entities.add(new MovingBaddie(new BoundingBox(new Vector(600, GameScreen.HEIGHT - 100), new Vector(20, 20)), new Vector(-3.75, 0)));
 
         factory = new CollisionFactory();
     }
@@ -67,6 +69,7 @@ public class CollisionDemo extends ScreenState {
 
     @Override
     public void step (EnumSet<Control> keys) {
+        entities.add(new MovingBaddie(new BoundingBox(new Vector(Math.random() * GameScreen.WIDTH, 20), new Vector(5*Math.random(), 5*Math.random())), new Vector(Math.random()/2, Math.random()+2)));
         if (keys.contains(Control.SELECT)) {
             // restart
             entities.clear();

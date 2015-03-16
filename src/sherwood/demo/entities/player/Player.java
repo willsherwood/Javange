@@ -4,6 +4,7 @@ import sherwood.demo.entities.Collider;
 import sherwood.demo.entities.Entity;
 import sherwood.demo.entities.Mover;
 import sherwood.demo.entities.Stepper;
+import sherwood.demo.entities.baddies.Baddie;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
@@ -39,18 +40,25 @@ public class Player implements Collider, Stepper, Mover {
 
     @Override
     public void collide (Entity entity) {
+        if (entity instanceof Baddie) {
+            // uh-oh! We're dead.
+            die();
+        }
         if (entity instanceof Block) {
             if (movement.bounds().over(movement.velocity().zx().negate()).intersects(entity.bounds())) {
                 // would have collided with the block even if we weren't moving horizontally
                 movement.horizontalCollision(entity);
-                System.out.println("horiz");
             } else {
                 movement.verticalCollision(entity);
             }
         }
     }
 
+    private void die () {
+        System.out.println("we're dead");
+    }
+
     public Direction direction () {
-        return null;
+        return movement.direction();
     }
 }
