@@ -6,7 +6,8 @@ import sherwood.demo.entities.Stepper;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.entities.player.Player;
 import sherwood.demo.physics.Vector;
-import sherwood.demo.states.graphics.BoxArtist;
+import sherwood.demo.states.graphics.FillArtist;
+import sherwood.demo.states.graphics.PlayerArtist;
 import sherwood.demo.structures.CollisionFactory;
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
@@ -55,9 +56,10 @@ public class CollisionDemo extends ScreenState {
 
     @Override
     public void draw (Graphics2D g) {
-        BoxArtist artist = new BoxArtist(g);
-        entities.forEach(artist::draw);
+        FillArtist artist = new FillArtist();
+        entities.forEach(a->artist.draw(a, g));
         factory.draw(g);
+        new PlayerArtist().draw(player, g);
         g.drawString(player.bounds().position().toString(), 20, 40);
         g.drawString(player.velocity().toString(), 20, 65);
 

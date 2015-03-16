@@ -51,4 +51,12 @@ public class BoundingBox {
         Rectangle b = new Rectangle(bounds.position.xc(), bounds.position.yc(), bounds.size.xc(), bounds.size.yc());
         return a.intersects(b);
     }
+
+    public Rectangle rect () {
+        return new Rectangle(position.xc(), position.yc(), size.xc(), size.yc());
+    }
+
+    public BoundingBox resize (int width, int height) {
+        return new BoundingBox(position, new Vector(width, height));
+    }
 }

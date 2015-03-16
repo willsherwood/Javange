@@ -1,9 +1,9 @@
 package sherwood.demo.structures.collisions;
 
-import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.entities.Collider;
 import sherwood.demo.entities.Entity;
-import sherwood.demo.states.graphics.BoxArtist;
+import sherwood.demo.physics.BoundingBox;
+import sherwood.demo.states.graphics.FrameArtist;
 import sherwood.demo.structures.QuadTree;
 import sherwood.demo.structures.UnorderedPair;
 
@@ -103,7 +103,7 @@ public class CollisionTree implements QuadTree {
         Color t = g.getColor();
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f));
         g.setColor(Color.GREEN);
-        new BoxArtist(g, ArtStyle.NO_FILL).draw(() -> bounds);
+        new FrameArtist().draw(() -> bounds, g);
         children.ifPresent(a -> {
             for (QuadTree Q : a)
                 ((CollisionTree) Q).draw(g);

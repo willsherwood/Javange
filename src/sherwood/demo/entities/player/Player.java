@@ -6,6 +6,7 @@ import sherwood.demo.entities.Mover;
 import sherwood.demo.entities.Stepper;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.physics.BoundingBox;
+import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
 import sherwood.inputs.keyboard.control.Control;
 
@@ -49,7 +50,7 @@ public class Player implements Collider, Stepper, Mover {
         }
     }
 
-    public void finalizeCollisions() {
-
+    public Direction direction () {
+        return null;
     }
 }
