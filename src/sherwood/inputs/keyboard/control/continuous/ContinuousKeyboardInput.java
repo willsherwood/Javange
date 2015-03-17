@@ -17,19 +17,23 @@ public class ContinuousKeyboardInput extends KeyboardInput {
 
     @Override
     public void keyPressed (KeyEvent e) {
-        set(e.getKeyCode(), true);
+        Control c = ControlMap.getControl(e.getKeyCode());
+        if (c != null)
+            set(c, true);
     }
 
     @Override
     public void keyReleased (KeyEvent e) {
-        set(e.getKeyCode(), false);
+        Control c = ControlMap.getControl(e.getKeyCode());
+        if (c != null)
+            set(c, false);
     }
 
-    public void set (int i, boolean j) {
+    public void set (Control i, boolean j) {
         if (j)
-            keys.add(ControlMap.getControl(i));
+            keys.add(i);
         else
-            keys.remove(ControlMap.getControl(i));
+            keys.remove(i);
     }
 
     @Override

@@ -5,11 +5,14 @@ import sherwood.demo.entities.Entity;
 import sherwood.demo.entities.Mover;
 import sherwood.demo.entities.Stepper;
 import sherwood.demo.entities.baddies.Baddie;
+import sherwood.demo.entities.baddies.MovingSpike;
 import sherwood.demo.entities.baddies.Spike;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
+import sherwood.demo.states.CollisionDemo;
+import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
 
 import java.util.EnumSet;
@@ -18,30 +21,37 @@ public class Player implements Collider, Stepper, Mover {
 
     private PlayerMovement movement;
 
-    public Player (Vector start) {
+    public Player(Vector start) {
         movement = new PlayerMovement(start);
     }
 
     @Override
-    public void step (EnumSet<Control> keys) {
+    public void step(EnumSet<Control> keys) {
         movement.step(keys);
         movement.addVelocity();
     }
 
     @Override
-    public Vector velocity () {
+    public Vector velocity() {
         return movement.velocity();
     }
 
 
     @Override
-    public BoundingBox bounds () {
+    public BoundingBox bounds() {
         return movement.bounds();
     }
 
     @Override
-    public void collide (Entity entity) {
+    public void collide(Entity entity) {
         if (entity instanceof Baddie) {
+            if (entity instanceof MovingSpike) {
+                MovingSpike m = (MovingSpike) entity;
+                if (m.poly().intersects(bounds().x(), bounds().y(), bounds().width(), bounds().height())) {
+                    die();
+                    return;
+                } else return;
+            }
             if (entity instanceof Spike) {
                 // if its a spike we need to check to see if they are really colliding
                 // because spike is represented by a square bounding box however
@@ -63,11 +73,11 @@ public class Player implements Collider, Stepper, Mover {
         }
     }
 
-    private void die () {
-        System.out.println("we're dead");
+    private void die() {
+        ((CollisionDemo) GameScreen.get().getScreenState()).reset();
     }
 
-    public Direction direction () {
+    public Direction direction() {
         return movement.direction();
     }
 }

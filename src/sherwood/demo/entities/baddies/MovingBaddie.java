@@ -46,4 +46,8 @@ public class MovingBaddie extends Baddie implements Mover, Collider, Stepper {
         velocity = velocity.negate();
         super.moveTo(bounds().position().over(velocity));
     }
+
+    protected void velocity(Vector vector) {
+        this.velocity = vector;
+    }
 }

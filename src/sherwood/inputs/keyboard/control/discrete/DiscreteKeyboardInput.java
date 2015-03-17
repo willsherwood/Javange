@@ -20,6 +20,8 @@ public class DiscreteKeyboardInput extends KeyboardInput {
     @Override
     public void keyPressed (KeyEvent e) {
         Control control = ControlMap.getControl(e.getKeyCode());
+        if (control == null)
+            return;
         if (!previous.contains(control)) {
             previous.add(control);
             current.add(control);
