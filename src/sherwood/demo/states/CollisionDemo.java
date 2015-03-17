@@ -4,9 +4,11 @@ import sherwood.demo.entities.Collider;
 import sherwood.demo.entities.Entity;
 import sherwood.demo.entities.Stepper;
 import sherwood.demo.entities.baddies.MovingBaddie;
+import sherwood.demo.entities.baddies.Spike;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.entities.player.Player;
 import sherwood.demo.physics.BoundingBox;
+import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
 import sherwood.demo.states.graphics.FillArtist;
 import sherwood.demo.states.graphics.PlayerArtist;
@@ -26,20 +28,25 @@ public class CollisionDemo extends ScreenState {
 
     private Player player;
     private Set<Entity> entities;
+    private Set<Spike> spikes;
+
     private CollisionFactory factory;
 
     public CollisionDemo () {
         entities = new HashSet<>();
+        spikes = new HashSet<>();
         makeDemo();
     }
 
     private void makeDemo() {
+        spikes.clear();
         player = new Player(new Vector(100, 300));
         entities.add(player);
         for (int x = 0; x < GameScreen.WIDTH; x += 32)
             if (Math.random() > 0.4) {
                 entities.add(new Block(new Vector(x, GameScreen.HEIGHT - 64), new Vector(64, 64)));
                 x += 32;
+                spikes.add(new Spike(new BoundingBox(new Vector(x, GameScreen.HEIGHT - 64 - 32), new Vector(32, 32)), Direction.LEFT));
             } else if (Math.random() > 0.6)
                 entities.add(new Block(new Vector(x, GameScreen.HEIGHT - 32), new Vector(32, 32)));
         entities.add(new Block(new Vector(0, GameScreen.HEIGHT - 32), new Vector(32, 32)));
@@ -59,17 +66,17 @@ public class CollisionDemo extends ScreenState {
     @Override
     public void draw (Graphics2D g) {
         FillArtist artist = new FillArtist();
+        Spike.SpikeArtist spikeArist = new Spike.SpikeArtist();
         entities.forEach(a->artist.draw(a, g));
+        spikes.forEach(a->spikeArist.draw(a, g));
         factory.draw(g);
         new PlayerArtist().draw(player, g);
         g.drawString(player.bounds().position().toString(), 20, 40);
         g.drawString(player.velocity().toString(), 20, 65);
-
     }
 
     @Override
     public void step (EnumSet<Control> keys) {
-        entities.add(new MovingBaddie(new BoundingBox(new Vector(Math.random() * GameScreen.WIDTH, 20), new Vector(5*Math.random(), 5*Math.random())), new Vector(Math.random()/2, Math.random()+2)));
         if (keys.contains(Control.SELECT)) {
             // restart
             entities.clear();
@@ -77,10 +84,12 @@ public class CollisionDemo extends ScreenState {
             return;
         }
         entities.stream().filter(a -> a instanceof Stepper).forEach(b -> ((Stepper) b).step(keys));
+        entities.addAll(spikes);
         factory.collisions(entities).forEach(a -> {
             ((Collider) a.first()).collide(a.second());
             if (a.second() instanceof Collider)
                 ((Collider) a.second()).collide(a.first());
         });
+        entities.removeAll(spikes);
     }
 }

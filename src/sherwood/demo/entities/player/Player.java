@@ -5,6 +5,7 @@ import sherwood.demo.entities.Entity;
 import sherwood.demo.entities.Mover;
 import sherwood.demo.entities.Stepper;
 import sherwood.demo.entities.baddies.Baddie;
+import sherwood.demo.entities.baddies.Spike;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
@@ -41,6 +42,14 @@ public class Player implements Collider, Stepper, Mover {
     @Override
     public void collide (Entity entity) {
         if (entity instanceof Baddie) {
+            if (entity instanceof Spike) {
+                // if its a spike we need to check to see if they are really colliding
+                // because spike is represented by a square bounding box however
+                // it still has a triangular shape
+                Spike s = (Spike) entity;
+                if (!s.poly().intersects(bounds().x(), bounds().y(), bounds().width(), bounds().height()))
+                    return;
+            }
             // uh-oh! We're dead.
             die();
         }
