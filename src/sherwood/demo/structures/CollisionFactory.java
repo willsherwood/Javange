@@ -1,7 +1,7 @@
 package sherwood.demo.structures;
 
-import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.entities.Entity;
+import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Vector;
 import sherwood.demo.structures.collisions.CollisionTree;
 import sherwood.gameScreen.GameScreen;

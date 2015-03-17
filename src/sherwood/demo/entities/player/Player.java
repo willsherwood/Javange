@@ -1,9 +1,6 @@
 package sherwood.demo.entities.player;
 
-import sherwood.demo.entities.Collider;
-import sherwood.demo.entities.Entity;
-import sherwood.demo.entities.Mover;
-import sherwood.demo.entities.Stepper;
+import sherwood.demo.entities.*;
 import sherwood.demo.entities.baddies.Baddie;
 import sherwood.demo.entities.baddies.MovingSpike;
 import sherwood.demo.entities.baddies.Spike;
@@ -11,39 +8,44 @@ import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
-import sherwood.demo.states.CollisionDemo;
+import sherwood.demo.states.RandomlyGeneratedLevel;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.EnumSet;
 
-public class Player implements Collider, Stepper, Mover {
+public class Player implements Collider, Stepper, Mover, Drawable {
 
     private PlayerMovement movement;
 
-    public Player(Vector start) {
+    public Player (Vector start) {
         movement = new PlayerMovement(start);
     }
 
     @Override
-    public void step(EnumSet<Control> keys) {
+    public void step (EnumSet<Control> keys) {
         movement.step(keys);
         movement.addVelocity();
+        if (keys.contains(Control.SELECT)) {
+            die();
+        }
     }
 
     @Override
-    public Vector velocity() {
+    public Vector velocity () {
         return movement.velocity();
     }
 
 
     @Override
-    public BoundingBox bounds() {
+    public BoundingBox bounds () {
         return movement.bounds();
     }
 
     @Override
-    public void collide(Entity entity) {
+    public void collide (Entity entity) {
         if (entity instanceof Baddie) {
             if (entity instanceof MovingSpike) {
                 MovingSpike m = (MovingSpike) entity;
@@ -73,11 +75,23 @@ public class Player implements Collider, Stepper, Mover {
         }
     }
 
-    private void die() {
-        ((CollisionDemo) GameScreen.get().getScreenState()).reset();
+    @Override
+    public void draw (Graphics2D g) {
+        g.setColor(Color.LIGHT_GRAY);
+        g.fill(bounds().rect());
+        g.setColor(Color.BLACK);
+        if (direction() == Direction.RIGHT) {
+            g.fill(bounds().resize(3, 3).over(new Vector(6, 3)).rect());
+        } else {
+            g.fill(bounds().resize(3, 3).over(new Vector(2, 3)).rect());
+        }
     }
 
-    public Direction direction() {
+    private void die () {
+        ((RandomlyGeneratedLevel) GameScreen.get().getScreenState()).reset();
+    }
+
+    public Direction direction () {
         return movement.direction();
     }
 }

@@ -3,7 +3,6 @@ package sherwood.demo.structures.collisions;
 import sherwood.demo.entities.Collider;
 import sherwood.demo.entities.Entity;
 import sherwood.demo.physics.BoundingBox;
-import sherwood.demo.states.graphics.FrameArtist;
 import sherwood.demo.structures.QuadTree;
 import sherwood.demo.structures.UnorderedPair;
 
@@ -94,7 +93,7 @@ public class CollisionTree implements QuadTree {
         return out;
     }
 
-    public void wipe() {
+    public void wipe () {
         children = Optional.empty();
         entities.clear();
     }
@@ -103,7 +102,7 @@ public class CollisionTree implements QuadTree {
         Color t = g.getColor();
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f));
         g.setColor(Color.GREEN);
-        new FrameArtist().draw(() -> bounds, g);
+        //new FrameArtist().draw(() -> bounds, g);
         children.ifPresent(a -> {
             for (QuadTree Q : a)
                 ((CollisionTree) Q).draw(g);

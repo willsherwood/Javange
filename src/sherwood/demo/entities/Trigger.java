@@ -6,7 +6,7 @@ public interface Trigger extends Collider {
     /**
      * should be called when the player collides with this
      */
-    void trigger();
+    void trigger ();
 
     @Override
     default void collide (Entity entity) {

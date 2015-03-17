@@ -38,16 +38,16 @@ public class MovingBaddie extends Baddie implements Mover, Collider, Stepper {
     public void step (EnumSet<Control> keys) {
         moveTo(bounds().over(velocity).position());
         if (bounds().x() <= 0 || bounds().x() + bounds().width() >= GameScreen.WIDTH ||
-            bounds().y() <= 0 || bounds().y() + bounds().height() >= GameScreen.HEIGHT)
+                bounds().y() <= 0 || bounds().y() + bounds().height() >= GameScreen.HEIGHT)
             turnAround();
     }
 
-    private void turnAround() {
+    private void turnAround () {
         velocity = velocity.negate();
         super.moveTo(bounds().position().over(velocity));
     }
 
-    protected void velocity(Vector vector) {
+    protected void velocity (Vector vector) {
         this.velocity = vector;
     }
 }

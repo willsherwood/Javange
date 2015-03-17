@@ -55,14 +55,14 @@ public class Vector {
     /**
      * @return a new vector with delta-x dx
      */
-    public Vector dx(double dx) {
+    public Vector dx (double dx) {
         return new Vector(x + dx, y);
     }
 
     /**
      * @return a new vector with delta-y dy
      */
-    public Vector dy(double dy) {
+    public Vector dy (double dy) {
         return new Vector(x, y + dy);
     }
 
@@ -73,42 +73,42 @@ public class Vector {
     /**
      * @return a vector with the x zeroed (zeroed-x)
      */
-    public Vector zx() {
+    public Vector zx () {
         return new Vector(0, y);
     }
 
     /**
      * @return a vector with the y zeroed (zeroed-y)
      */
-    public Vector zy() {
+    public Vector zy () {
         return new Vector(x, 0);
     }
 
     /**
      * @return a vector with its x set to x (set-x)
      */
-    public Vector sx(double x) {
+    public Vector sx (double x) {
         return new Vector(x, y);
     }
 
     /**
      * @return a vector with its x set to x (set-x)
      */
-    public Vector sy(double y) {
+    public Vector sy (double y) {
         return new Vector(x, y);
     }
 
     /**
      * @return a vector with its y capped to the absolute value of y
      */
-    public Vector cy(double y) {
+    public Vector cy (double y) {
         return new Vector(x, Math.abs(this.y) > Math.abs(y) ? Math.signum(this.y) * y : this.y);
     }
 
     /**
      * @return a vector with its x capped to the absolute value of x
      */
-    public Vector cx(double x) {
+    public Vector cx (double x) {
         return new Vector(Math.abs(this.x) > Math.abs(x) ? Math.signum(this.x) * x : this.x, y);
     }
 }

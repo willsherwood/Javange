@@ -4,10 +4,9 @@ import sherwood.demo.entities.Entity;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
-import sherwood.demo.states.graphics.Artist;
 import sherwood.inputs.keyboard.control.Control;
 
-import java.awt.*;
+import java.awt.Polygon;
 import java.util.EnumSet;
 
 public class MovingSpike extends MovingBaddie {
@@ -15,7 +14,13 @@ public class MovingSpike extends MovingBaddie {
     private final Direction face;
     private Vector initialPosition;
 
-    public Polygon poly() {
+    public MovingSpike (BoundingBox bounds, Vector velocity) {
+        super(bounds, velocity);
+        this.face = Direction.UP;
+        this.initialPosition = bounds.position();
+    }
+
+    public Polygon poly () {
         int[] x, y;
         if (face.vertical()) {
             x = new int[]{bounds().position().xc(), bounds().position().xc() + bounds().size().xc() / 2, bounds().position().xc() + bounds().size().xc()};
@@ -35,14 +40,8 @@ public class MovingSpike extends MovingBaddie {
         return new Polygon(x, y, 3);
     }
 
-    public MovingSpike(BoundingBox bounds, Vector velocity) {
-        super(bounds, velocity);
-        this.face = Direction.UP;
-        this.initialPosition = bounds.position();
-    }
-
     @Override
-    public void step(EnumSet<Control> keys) {
+    public void step (EnumSet<Control> keys) {
         moveTo(bounds().position().over(velocity()));
         if (bounds().position().y() < initialPosition.y()) {
             velocity(velocity().negate());
@@ -54,15 +53,6 @@ public class MovingSpike extends MovingBaddie {
     }
 
     @Override
-    public void collide(Entity entity) {
-    }
-
-    public static final class SpikeArtist implements Artist<MovingSpike> {
-
-        @Override
-        public void draw (MovingSpike spike, Graphics2D g) {
-            g.setColor(Color.RED);
-            g.fillPolygon(spike.poly());
-        }
+    public void collide (Entity entity) {
     }
 }

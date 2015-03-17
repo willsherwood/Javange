@@ -13,14 +13,12 @@ import java.util.Map;
 
 public class PlayerMovement {
 
+    private static final Vector size = new Vector(11, 21);
     private Map<Control, Disposable> actions;
     private Vector velocity;
     private Vector position;
     private Jumper jumper;
-
     private Direction direction = Direction.RIGHT;
-
-    private static final Vector size = new Vector(11, 21);
 
     public PlayerMovement (Vector start) {
         actions = new EnumMap<>(Control.class);

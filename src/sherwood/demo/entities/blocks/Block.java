@@ -1,10 +1,13 @@
 package sherwood.demo.entities.blocks;
 
-import sherwood.demo.entities.Entity;
+import sherwood.demo.entities.Drawable;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Vector;
 
-public class Block implements Entity {
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+public class Block implements Drawable {
 
     private final BoundingBox bounds;
 
@@ -15,5 +18,11 @@ public class Block implements Entity {
     @Override
     public BoundingBox bounds () {
         return bounds;
+    }
+
+    @Override
+    public void draw (Graphics2D g) {
+        g.setColor(Color.WHITE);
+        g.fill(bounds().rect());
     }
 }

@@ -1,6 +1,5 @@
 package sherwood.demo.entities;
 
-import sherwood.demo.entities.Entity;
 import sherwood.inputs.keyboard.control.Control;
 
 import java.util.EnumSet;

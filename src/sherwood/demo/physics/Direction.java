@@ -13,11 +13,11 @@ public enum Direction {
         this.y = y;
     }
 
-    public int x() {
+    public int x () {
         return x;
     }
 
-    public int y() {
+    public int y () {
         return y;
     }
 

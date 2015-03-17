@@ -22,5 +22,5 @@ public interface QuadTree {
     /**
      * clear the tree
      */
-    void wipe();
+    void wipe ();
 }

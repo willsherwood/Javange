@@ -15,7 +15,7 @@ public class ControlMap {
             keyMap.put(Integer.valueOf(ConfigHandler.load(c.toString())), c);
     }
 
-    public static Control getControl(int keyCode) {
+    public static Control getControl (int keyCode) {
         return keyMap.get(keyCode);
     }
 }
