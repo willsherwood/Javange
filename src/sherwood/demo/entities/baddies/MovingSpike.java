@@ -1,12 +1,12 @@
 package sherwood.demo.entities.baddies;
 
+import sherwood.demo.entities.Drawable;
 import sherwood.demo.entities.Entity;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
 import sherwood.inputs.keyboard.control.Control;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.util.EnumSet;
@@ -60,10 +60,6 @@ public class MovingSpike extends MovingBaddie {
 
     @Override
     public void draw (Graphics2D g, Vector position) {
-        g.setColor(Color.RED);
-        Vector last = bounds().position();
-        moveTo(position);
-        g.fill(poly());
-        moveTo(last);
+        Drawable.tile(g, position, this, "Spike");
     }
 }

@@ -2,10 +2,7 @@ package sherwood.demo.entities.baddies;
 
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
-import sherwood.demo.physics.Vector;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Polygon;
 
 public class Spike extends Baddie {
@@ -13,7 +10,7 @@ public class Spike extends Baddie {
     private final Direction face;
 
     public Spike (BoundingBox bounds, Direction face) {
-        super(bounds);
+        super(bounds.resize(bounds.width(), bounds.height()-1));
         this.face = face;
     }
 
@@ -35,14 +32,5 @@ public class Spike extends Baddie {
                 x[i] += (i == 1 ? -1 : 1) * bounds().size().xc();
         }
         return new Polygon(x, y, 3);
-    }
-
-    @Override
-    public void draw (Graphics2D g, Vector position) {
-        g.setColor(Color.RED);
-        Vector last = bounds().position();
-        moveTo(position);
-        g.fill(poly());
-        moveTo(last);
     }
 }
