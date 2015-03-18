@@ -16,6 +16,7 @@ import sherwood.screenStates.ScreenState;
 
 import java.awt.Graphics2D;
 import java.util.EnumSet;
+import java.util.Queue;
 
 public class RandomlyGeneratedLevel extends ScreenState {
 
@@ -74,7 +75,11 @@ public class RandomlyGeneratedLevel extends ScreenState {
 
     @Override
     public void draw (Graphics2D g) {
-        level.entities().forEach(a -> ((Drawable) a.entity()).draw(g, a.drawingBounds().position()));
+        Queue<DepthEntity> drawingQueue = level.entities();
+        while (!drawingQueue.isEmpty()) {
+            DepthEntity entity = drawingQueue.poll();
+            ((Drawable) entity.entity()).draw(g, entity.drawingBounds().position());
+        }
     }
 
     @Override
