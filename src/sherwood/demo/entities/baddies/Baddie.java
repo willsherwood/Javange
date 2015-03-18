@@ -25,8 +25,8 @@ public abstract class Baddie implements Drawable {
     }
 
     @Override
-    public void draw (Graphics2D g) {
+    public void draw (Graphics2D g, Vector position) {
         g.setColor(Color.RED);
-        g.fill(bounds.rect());
+        g.fill(new BoundingBox(position, bounds.size()).rect());
     }
 }

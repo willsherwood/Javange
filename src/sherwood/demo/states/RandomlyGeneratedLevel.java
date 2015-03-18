@@ -74,7 +74,7 @@ public class RandomlyGeneratedLevel extends ScreenState {
 
     @Override
     public void draw (Graphics2D g) {
-        level.entities().forEach(a -> ((Drawable) a.entity()).draw(g));
+        level.entities().forEach(a -> ((Drawable) a.entity()).draw(g, a.drawingBounds().position()));
     }
 
     @Override

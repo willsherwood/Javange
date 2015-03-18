@@ -48,7 +48,6 @@ public class HardViewportLevel implements Level {
                 .filter(a -> a.entity() instanceof Drawable)
                 .filter(a -> a.entity().bounds().intersects(viewport))
                 .collect(Collectors.toList()));
-        //System.out.println(viewport.position());
         out.forEach(a->a.drawingBounds(a.entity().bounds().over(viewport.position().negate())));
         out.add(new DepthEntity(factory, Integer.MAX_VALUE - 1));
         return out;

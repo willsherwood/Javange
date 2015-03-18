@@ -17,7 +17,7 @@ public class CollisionFactory implements Drawable {
         tree = new CollisionTree(new BoundingBox(new Vector(0, 0), new Vector(GameScreen.WIDTH, GameScreen.HEIGHT)));
     }
 
-    public CollisionFactory(Vector size) {
+    public CollisionFactory (Vector size) {
         tree = new CollisionTree(new BoundingBox(new Vector(0, 0), size));
     }
 
@@ -28,7 +28,7 @@ public class CollisionFactory implements Drawable {
     }
 
     @Override
-    public void draw (Graphics2D g) {
+    public void draw (Graphics2D g, Vector position) {
         ((CollisionTree) tree).draw(g);
     }
 

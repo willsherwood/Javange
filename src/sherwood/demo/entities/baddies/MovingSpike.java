@@ -59,8 +59,11 @@ public class MovingSpike extends MovingBaddie {
     }
 
     @Override
-    public void draw (Graphics2D g) {
+    public void draw (Graphics2D g, Vector position) {
         g.setColor(Color.RED);
+        Vector last = bounds().position();
+        moveTo(position);
         g.fill(poly());
+        moveTo(last);
     }
 }

@@ -76,14 +76,15 @@ public class Player implements Collider, Stepper, Mover, Drawable {
     }
 
     @Override
-    public void draw (Graphics2D g) {
+    public void draw (Graphics2D g, Vector position) {
+        BoundingBox draw = new BoundingBox(position, bounds().size());
         g.setColor(Color.LIGHT_GRAY);
-        g.fill(bounds().rect());
+        g.fill(draw.rect());
         g.setColor(Color.BLACK);
         if (direction() == Direction.RIGHT) {
-            g.fill(bounds().resize(3, 3).over(new Vector(6, 3)).rect());
+            g.fill(draw.resize(3, 3).over(new Vector(6, 3)).rect());
         } else {
-            g.fill(bounds().resize(3, 3).over(new Vector(2, 3)).rect());
+            g.fill(draw.resize(3, 3).over(new Vector(2, 3)).rect());
         }
     }
 

@@ -21,8 +21,8 @@ public class Block implements Drawable {
     }
 
     @Override
-    public void draw (Graphics2D g) {
+    public void draw (Graphics2D g, Vector position) {
         g.setColor(Color.WHITE);
-        g.fill(bounds().rect());
+        g.fill(new BoundingBox(position, bounds.size()).rect());
     }
 }
