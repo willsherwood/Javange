@@ -3,8 +3,6 @@ package sherwood.demo.structures.collisions;
 import sherwood.demo.entities.Collider;
 import sherwood.demo.entities.Entity;
 import sherwood.demo.physics.BoundingBox;
-import sherwood.demo.structures.QuadTree;
-import sherwood.demo.structures.UnorderedPair;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

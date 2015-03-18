@@ -1,15 +1,24 @@
 package sherwood.demo.states;
 
 import sherwood.demo.entities.Entity;
+import sherwood.demo.physics.BoundingBox;
+
+import java.util.Optional;
 
 public class DepthEntity implements Comparable<DepthEntity> {
 
     private int depth;
     private Entity entity;
+    private Optional<BoundingBox> drawingBounds;
 
     public DepthEntity (Entity entity, int depth) {
+        this(entity, depth, Optional.empty());
+    }
+
+    public DepthEntity (Entity entity, int depth, Optional<BoundingBox> drawingBounds) {
         this.entity = entity;
         this.depth = depth;
+        this.drawingBounds = drawingBounds;
     }
 
     public int depth () {
@@ -22,6 +31,18 @@ public class DepthEntity implements Comparable<DepthEntity> {
 
     public Entity entity () {
         return entity;
+    }
+
+    /**
+     * @return the bounds to draw this image if they are specified, otherwise
+     * the original bounds
+     */
+    public BoundingBox drawingBounds() {
+        return drawingBounds.orElse(entity.bounds());
+    }
+
+    public void drawingBounds(BoundingBox boundingBox) {
+        drawingBounds = Optional.of(boundingBox);
     }
 
     @Override
