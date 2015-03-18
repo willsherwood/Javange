@@ -52,10 +52,10 @@ public class PlayerMovement {
     }
 
     public void verticalCollision (Entity entity) {
-        if (velocity.y() >= 0) {
+        if (velocity.y() >= 0) /* falling */ {
             position = new Vector(position.x(), entity.bounds().position().y() - bounds().height());
-            velocity = velocity.sy(0);
             jumper.reset();
+            velocity = velocity.sy(0);
             return;
         }
         position = new Vector(position.x(), entity.bounds().position().y() + entity.bounds().height());
@@ -76,6 +76,9 @@ public class PlayerMovement {
         return new BoundingBox(position, size);
     }
 
+    /**
+     * changes the position to one step of velocity
+     */
     public void addVelocity () {
         position = position.over(velocity);
     }

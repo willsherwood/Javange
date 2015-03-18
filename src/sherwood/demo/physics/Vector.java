@@ -111,4 +111,11 @@ public class Vector {
     public Vector cx (double x) {
         return new Vector(Math.abs(this.x) > Math.abs(x) ? Math.signum(this.x) * x : this.x, y);
     }
+
+    /**
+     * @return a vector multiplied by the scalar i
+     */
+    public Vector times (int i) {
+        return new Vector(x*i, y*i);
+    }
 }
