@@ -6,6 +6,8 @@ import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
 import sherwood.inputs.keyboard.control.Control;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.util.EnumSet;
 
@@ -54,5 +56,11 @@ public class MovingSpike extends MovingBaddie {
 
     @Override
     public void collide (Entity entity) {
+    }
+
+    @Override
+    public void draw (Graphics2D g) {
+        g.setColor(Color.RED);
+        g.fill(poly());
     }
 }

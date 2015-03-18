@@ -37,7 +37,7 @@ public class RandomlyGeneratedLevel extends ScreenState {
     public void reset () {
         player = new Player(new Vector(64, 64));
         entities.clear();
-        entities.add(new DepthEntity(player, -999));
+        entities.add(new DepthEntity(player, 999));
         for (int x = 0; x < GameScreen.WIDTH; x += 32) {
             if (Math.random() > .5) {
                 bigBlock(x);
@@ -56,7 +56,7 @@ public class RandomlyGeneratedLevel extends ScreenState {
         Entity block = new Block(new Vector(x, GameScreen.HEIGHT - 32), new Vector(32, 12));
         if (Math.random() > .7) {
             Entity spike = new Spike(new BoundingBox(new Vector(x, GameScreen.HEIGHT - 64), new Vector(32, 32)), Direction.UP);
-            entities.add(new DepthEntity(spike, 999));
+            entities.add(new DepthEntity(spike, -999));
         }
         entities.add(new DepthEntity(block, 0));
     }
@@ -70,7 +70,7 @@ public class RandomlyGeneratedLevel extends ScreenState {
         Entity block = new Block(new Vector(x, GameScreen.HEIGHT - 32), new Vector(32, 32));
         if (Math.random() > .7) {
             Entity spike = new Spike(new BoundingBox(new Vector(x, GameScreen.HEIGHT - 64), new Vector(32, 32)), Direction.UP);
-            entities.add(new DepthEntity(spike, 999));
+            entities.add(new DepthEntity(spike, -999));
         }
         entities.add(new DepthEntity(block, 0));
     }
@@ -79,14 +79,16 @@ public class RandomlyGeneratedLevel extends ScreenState {
         Entity block = new Block(new Vector(x, GameScreen.HEIGHT - 64), new Vector(64, 64));
         if (Math.random() > .5) {
             Entity movingSpike = new MovingSpike(new BoundingBox(new Vector(x, GameScreen.HEIGHT - 64 - 32), new Vector(32, 32)), new Vector(0, Math.random() * .8 + .2));
-            entities.add(new DepthEntity(movingSpike, 999));
+            entities.add(new DepthEntity(movingSpike, -999));
         }
         entities.add(new DepthEntity(block, 0));
     }
 
     @Override
     public void draw (Graphics2D g) {
-        entities.stream().filter(a -> a.entity() instanceof Drawable).forEach(a -> ((Drawable) a.entity()).draw(g));
+        Queue<DepthEntity> toDraw = new PriorityQueue<>(entities.parallelStream().filter(a->a.entity() instanceof Drawable).collect(Collectors.toList()));
+        while (!toDraw.isEmpty())
+            ((Drawable)toDraw.poll().entity()).draw(g);
     }
 
     @Override
