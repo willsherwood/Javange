@@ -56,7 +56,7 @@ public class BoundingBox {
         return new Rectangle(position.xc(), position.yc(), size.xc(), size.yc());
     }
 
-    public BoundingBox resize (int width, int height) {
+    public BoundingBox resize (double width, double height) {
         return new BoundingBox(position, new Vector(width, height));
     }
 }
