@@ -23,4 +23,11 @@ public interface Drawable extends Entity {
                 g.drawImage(SpriteBox.instance().sprite("res/img/" + className + ".png"),
                         position.over(new Vector(x * 32, 0)).xc(), position.over(new Vector(0, y * 32)).yc(), null);
     }
+
+    /**
+     * draw the given sprite at vector position given by the class name (will access file res/img/className.png)
+     */
+    static void paint (Graphics2D g, Vector position, String className) {
+        g.drawImage(SpriteBox.instance().sprite("res/img/" + className + ".png"), position.xc(), position.yc(), null);
+    }
 }

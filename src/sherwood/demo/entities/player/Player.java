@@ -12,20 +12,22 @@ import sherwood.demo.states.RandomlyGeneratedLevel;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.EnumSet;
 
 public class Player implements Collider, Stepper, Mover, Drawable {
 
     private PlayerMovement movement;
+    private PlayerSprite sprite;
 
     public Player (Vector start) {
         movement = new PlayerMovement(start);
+        sprite = new PlayerSprite();
     }
 
     @Override
     public void step (EnumSet<Control> keys) {
+        sprite.step();
         movement.step(keys);
         movement.addVelocity();
         if (keys.contains(Control.SELECT)) {
@@ -77,14 +79,13 @@ public class Player implements Collider, Stepper, Mover, Drawable {
 
     @Override
     public void draw (Graphics2D g, Vector position) {
-        BoundingBox draw = new BoundingBox(position, bounds().size());
-        g.setColor(Color.LIGHT_GRAY);
-        g.fill(draw.rect());
-        g.setColor(Color.BLACK);
         if (direction() == Direction.RIGHT) {
-            g.fill(draw.resize(3, 3).over(new Vector(6, 3)).rect());
+            Drawable.paint(g, position.over(new Vector(-5, 0)), "player/ridle0");
+//            g.setColor(Color.PINK);
+//            Vector v = position.over(new Vector(0, 0));
+//            g.fillRect(v.xc(), v.yc(), (int)bounds().width(),(int) bounds().height());
         } else {
-            g.fill(draw.resize(3, 3).over(new Vector(2, 3)).rect());
+            Drawable.paint(g, position.over(new Vector(-6, 0)), "player/lidle0");
         }
     }
 

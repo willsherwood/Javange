@@ -78,8 +78,10 @@ public class RandomlyGeneratedLevel extends ScreenState {
         Queue<DepthEntity> drawingQueue = level.entities();
         while (!drawingQueue.isEmpty()) {
             DepthEntity entity = drawingQueue.poll();
+            System.out.print(entity.depth() + " ");
             ((Drawable) entity.entity()).draw(g, entity.drawingBounds().position());
         }
+        System.out.println();
     }
 
     @Override

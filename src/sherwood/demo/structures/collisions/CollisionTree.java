@@ -101,6 +101,7 @@ public class CollisionTree implements QuadTree {
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f));
         g.setColor(Color.GREEN);
         //new FrameArtist().draw(() -> bounds, g);
+        g.draw(bounds.rect());
         children.ifPresent(a -> {
             for (QuadTree Q : a)
                 ((CollisionTree) Q).draw(g);
