@@ -22,7 +22,7 @@ public class Player implements Collider, Stepper, Mover, Drawable {
 
     public Player (Vector start) {
         movement = new PlayerMovement(start);
-        sprite = new PlayerSprite();
+        sprite = new PlayerSprite(this);
     }
 
     @Override
@@ -80,12 +80,12 @@ public class Player implements Collider, Stepper, Mover, Drawable {
     @Override
     public void draw (Graphics2D g, Vector position) {
         if (direction() == Direction.RIGHT) {
-            Drawable.paint(g, position.over(new Vector(-5, 0)), "player/ridle0");
+            Drawable.paint(g, position.over(new Vector(-5, 0)), "player/walking/walk0");
 //            g.setColor(Color.PINK);
 //            Vector v = position.over(new Vector(0, 0));
 //            g.fillRect(v.xc(), v.yc(), (int)bounds().width(),(int) bounds().height());
         } else {
-            Drawable.paint(g, position.over(new Vector(-6, 0)), "player/lidle0");
+            Drawable.paint(g, position.over(new Vector(-6 + 6, 0)), "player/idle0");
         }
     }
 
