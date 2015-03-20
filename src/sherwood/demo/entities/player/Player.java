@@ -8,8 +8,8 @@ import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
-import sherwood.demo.states.RandomlyGeneratedLevel;
-import sherwood.gameScreen.GameScreen;
+import sherwood.demo.structures.levels.Level;
+import sherwood.demo.structures.levels.event.Event;
 import sherwood.inputs.keyboard.control.Control;
 
 import java.awt.Graphics2D;
@@ -83,7 +83,7 @@ public class Player implements Collider, Stepper, Mover, Drawable {
     }
 
     private void die () {
-        ((RandomlyGeneratedLevel) GameScreen.get().getScreenState()).reset();
+        Level.currentLevel().activate(Event.playerDeath);
     }
 
     public Direction direction () {

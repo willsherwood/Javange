@@ -10,15 +10,16 @@ import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
 import sherwood.demo.structures.levels.HardViewportLevel;
 import sherwood.demo.structures.levels.Level;
+import sherwood.demo.structures.levels.LevelState;
+import sherwood.demo.structures.levels.event.Event;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
-import sherwood.screenStates.ScreenState;
 
 import java.awt.Graphics2D;
 import java.util.EnumSet;
 import java.util.Queue;
 
-public class RandomlyGeneratedLevel extends ScreenState {
+public class RandomlyGeneratedLevel extends LevelState {
 
     private Level level;
 
@@ -85,5 +86,12 @@ public class RandomlyGeneratedLevel extends ScreenState {
     @Override
     public void step (EnumSet<Control> keys) {
         level.step(keys);
+    }
+
+    @Override
+    public void activate (Event event) {
+        if (event == Event.playerDeath) {
+            reset();
+        }
     }
 }

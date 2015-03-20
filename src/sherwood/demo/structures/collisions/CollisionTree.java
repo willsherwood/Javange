@@ -109,4 +109,9 @@ public class CollisionTree implements QuadTree {
         g.setColor(t);
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
+
+    @Override
+    public BoundingBox bounds () {
+        return bounds;
+    }
 }

@@ -4,7 +4,7 @@ import sherwood.demo.entities.Entity;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
-import sherwood.demo.structures.collisions.Disposable;
+import sherwood.demo.structures.Disposable;
 import sherwood.inputs.keyboard.control.Control;
 
 import java.util.EnumMap;

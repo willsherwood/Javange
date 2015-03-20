@@ -34,6 +34,6 @@ public class CollisionFactory implements Drawable {
 
     @Override
     public BoundingBox bounds () {
-        return new BoundingBox(new Vector(0, 0), new Vector(GameScreen.WIDTH, GameScreen.HEIGHT));
+        return tree.bounds();
     }
 }

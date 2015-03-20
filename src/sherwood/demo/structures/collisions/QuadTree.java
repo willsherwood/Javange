@@ -4,7 +4,7 @@ import sherwood.demo.entities.Entity;
 
 import java.util.Set;
 
-public interface QuadTree {
+public interface QuadTree extends Entity {
     /**
      * attempts to insert an entity into this quad tree
      *
