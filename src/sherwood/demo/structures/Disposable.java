@@ -1,4 +1,4 @@
-package sherwood.demo.structures.collisions;
+package sherwood.demo.structures;
 
 @FunctionalInterface
 public interface Disposable {
