@@ -1,5 +1,6 @@
 package sherwood.demo.states;
 
+import sherwood.audio.Sound;
 import sherwood.demo.entities.Drawable;
 import sherwood.demo.entities.Entity;
 import sherwood.demo.entities.Triggered;
@@ -11,12 +12,14 @@ import sherwood.demo.entities.trigger.CollisionTrigger;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
-import sherwood.demo.structures.levels.HardViewportLevel;
 import sherwood.demo.structures.levels.Level;
 import sherwood.demo.structures.levels.LevelState;
+import sherwood.demo.structures.levels.ScrollingViewportLevel;
 import sherwood.demo.structures.levels.event.Event;
+import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
+import sherwood.inputs.keyboard.control.MixedKeyboardInput;
 
 import java.awt.Graphics2D;
 import java.util.EnumSet;
@@ -30,8 +33,15 @@ public class RandomlyGeneratedLevel extends LevelState {
         reset();
     }
 
+    @Override
+    public void init () {
+        GameScreen.get().requestKeyInputMechanism(new MixedKeyboardInput(EnumSet.of(Control.LEFT, Control.RIGHT, Control.UP, Control.DOWN, Control.A)));
+        GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm(60));
+        Sound.PATHETIQUE.play();
+    }
+
     public void reset () {
-        level = new HardViewportLevel(2, 2, new Vector(64, 64));
+        level = new ScrollingViewportLevel(2, 2, new Vector(64, 64));
         for (int x = 0; x < GameScreen.WIDTH * 2; x += 32) {
             if (Math.random() > .5) {
                 bigBlock(x);

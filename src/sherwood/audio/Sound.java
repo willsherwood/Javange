@@ -1,19 +1,20 @@
 package sherwood.audio;
 
 import javax.sound.sampled.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 public enum Sound {
 
-    ;
+    PATHETIQUE("testmusic");
 
     public static boolean MUTE = false;
     private Clip clip;
 
     private Sound (String fileName) {
         try {
-            URL url = this.getClass().getClassLoader().getResource("res/sound/" + fileName + ".wav");
+            URL url = new File("res/sound/" + fileName + ".wav").toURL();
             AudioInputStream audioInputStream = AudioSystem
                     .getAudioInputStream(url);
             clip = AudioSystem.getClip();
