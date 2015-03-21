@@ -2,9 +2,12 @@ package sherwood.demo.states;
 
 import sherwood.demo.entities.Drawable;
 import sherwood.demo.entities.Entity;
+import sherwood.demo.entities.Triggered;
 import sherwood.demo.entities.baddies.MovingSpike;
 import sherwood.demo.entities.baddies.Spike;
+import sherwood.demo.entities.baddies.triggered.TriggeredSpike;
 import sherwood.demo.entities.blocks.Block;
+import sherwood.demo.entities.trigger.CollisionTrigger;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
@@ -58,9 +61,15 @@ public class RandomlyGeneratedLevel extends LevelState {
 
     private void smallBlock (int x) {
         Entity block = new Block(new Vector(x, GameScreen.HEIGHT - 32), new Vector(32, 32));
-        if (Math.random() > .7) {
+        if (Math.random() > .99) {
             Entity spike = new Spike(new BoundingBox(new Vector(x, GameScreen.HEIGHT - 64), new Vector(32, 32)), Direction.UP);
             level.add(spike, -999);
+        } else {
+            Triggered spike = new TriggeredSpike(new BoundingBox(
+                    new Vector(x, GameScreen.HEIGHT - 64), new Vector(32, 32)), Vector.ZERO);
+            Entity trigger = new CollisionTrigger(new BoundingBox(x - 4, 0, 40, GameScreen.HEIGHT), spike);
+            level.add(spike, 0);
+            level.add(trigger, 0);
         }
         level.add(block, 0);
     }
