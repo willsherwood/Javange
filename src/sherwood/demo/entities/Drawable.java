@@ -2,8 +2,10 @@ package sherwood.demo.entities;
 
 import sherwood.demo.graphics.SpriteBox;
 import sherwood.demo.physics.Vector;
+import sherwood.demo.states.DepthEntity;
 
 import java.awt.Graphics2D;
+import java.util.PriorityQueue;
 
 public interface Drawable extends Entity {
     /**
@@ -29,5 +31,15 @@ public interface Drawable extends Entity {
      */
     static void paint (Graphics2D g, Vector position, String className) {
         g.drawImage(SpriteBox.instance().sprite("res/img/" + className + ".png"), position.xc(), position.yc(), null);
+    }
+
+    /**
+     * draws the collection of entities onto the screen in order by depth
+     */
+    static void draw (Graphics2D g, PriorityQueue<DepthEntity> entities) {
+        while (!entities.isEmpty()) {
+            DepthEntity entity = entities.poll();
+            ((Drawable) entity.entity()).draw(g, entity.drawingBounds().position());
+        }
     }
 }

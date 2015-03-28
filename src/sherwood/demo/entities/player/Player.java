@@ -31,7 +31,7 @@ public class Player implements Collider, Stepper, Mover, Drawable {
         movement.step(keys);
         movement.addVelocity();
         if (keys.contains(Control.SELECT)) {
-            die();
+            Level.currentLevel().activate(Event.reset);
         }
     }
 
