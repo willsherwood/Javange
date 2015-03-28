@@ -1,9 +1,6 @@
 package sherwood.demo.structures.levels;
 
-import sherwood.demo.entities.Collider;
-import sherwood.demo.entities.Drawable;
-import sherwood.demo.entities.Entity;
-import sherwood.demo.entities.Stepper;
+import sherwood.demo.entities.*;
 import sherwood.demo.entities.player.Player;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Vector;
@@ -38,6 +35,7 @@ public class ScrollingViewportLevel implements Level {
         factory = new CollisionFactory(new Vector(rows * GameScreen.WIDTH, columns * GameScreen.HEIGHT));
         player = new Player(playerStart);
         add(player, 999);
+        add(new Controller(), 0);
     }
 
     @Override
@@ -61,6 +59,14 @@ public class ScrollingViewportLevel implements Level {
         return out;
     }
 
+    /**
+     *  running time: o(n) use sparingly
+     */
+    @Override
+    public void remove (Entity entity) {
+        entities.removeAll(entities.parallelStream().filter(a->a.entity().equals(entity)).collect(Collectors.toSet()));
+    }
+
     @Override
     public void step (EnumSet<Control> keys) {
         entities.stream().filter(a -> a.entity() instanceof Stepper).forEach(a -> ((Stepper) a.entity()).step(keys));
@@ -69,5 +75,10 @@ public class ScrollingViewportLevel implements Level {
             if (a.second() instanceof Collider)
                 ((Collider) a.second()).collide(a.first());
         });
+    }
+
+    @Override
+    public Player player () {
+        return player;
     }
 }

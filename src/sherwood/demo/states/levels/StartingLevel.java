@@ -1,8 +1,10 @@
 package sherwood.demo.states.levels;
 
+import sherwood.audio.Sound;
 import sherwood.demo.entities.Drawable;
 import sherwood.demo.entities.baddies.Spike;
 import sherwood.demo.entities.blocks.Block;
+import sherwood.demo.entities.particles.Explosion;
 import sherwood.demo.entities.player.PlayerMovement;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
@@ -11,8 +13,10 @@ import sherwood.demo.structures.levels.HardViewportLevel;
 import sherwood.demo.structures.levels.Level;
 import sherwood.demo.structures.levels.LevelState;
 import sherwood.demo.structures.levels.event.Event;
+import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
+import sherwood.inputs.keyboard.control.MixedKeyboardInput;
 
 import java.awt.Graphics2D;
 import java.util.EnumSet;
@@ -23,6 +27,13 @@ public class StartingLevel extends LevelState {
 
     public StartingLevel () {
         reset();
+    }
+
+    @Override
+    public void init () {
+        GameScreen.get().requestKeyInputMechanism(new MixedKeyboardInput(EnumSet.of(Control.LEFT, Control.RIGHT, Control.UP, Control.DOWN, Control.A)));
+        GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm(60));
+        Sound.PATHETIQUE.play();
     }
 
     private void reset () {
@@ -54,9 +65,13 @@ public class StartingLevel extends LevelState {
         switch (event) {
             case reset:
                 reset();
+                break;
             case playerDeath:
-                level.
-
+                System.out.println(event);
+                for (int i=0; i<1000; i++)
+                    level.add(new Explosion(new Vector(level.player().bounds().x(), level.player().bounds().y()), new Vector(3, 3)), 999);
+                level.remove(level.player());
+                break;
         }
     }
 

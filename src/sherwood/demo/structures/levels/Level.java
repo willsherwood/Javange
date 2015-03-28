@@ -1,6 +1,7 @@
 package sherwood.demo.structures.levels;
 
 import sherwood.demo.entities.Entity;
+import sherwood.demo.entities.player.Player;
 import sherwood.demo.states.DepthEntity;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
@@ -21,9 +22,19 @@ public interface Level {
     PriorityQueue<DepthEntity> entities();
 
     /**
+     *  removes this entity from the level
+     */
+    void remove(Entity entity);
+
+    /**
      * runs the step method of every stepper
      */
     void step(EnumSet<Control> keys);
+
+    /**
+     * @return the player in this level
+     */
+    Player player();
 
     static LevelState currentLevel() {
         ScreenState s = GameScreen.get().getScreenState();
