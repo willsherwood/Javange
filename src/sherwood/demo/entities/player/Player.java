@@ -30,9 +30,6 @@ public class Player implements Collider, Stepper, Mover, Drawable {
         sprite.step();
         movement.step(keys);
         movement.addVelocity();
-        if (keys.contains(Control.SELECT)) {
-            Level.currentLevel().activate(Event.reset);
-        }
     }
 
     @Override
