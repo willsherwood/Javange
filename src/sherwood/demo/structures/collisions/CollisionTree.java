@@ -99,7 +99,7 @@ public class CollisionTree implements QuadTree {
     public void draw (Graphics2D g) {
         Color t = g.getColor();
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f));
-        g.setColor(Color.GREEN);
+        g.setColor(Color.RED);
         //new FrameArtist().draw(() -> bounds, g);
         g.draw(bounds.rect());
         children.ifPresent(a -> {
