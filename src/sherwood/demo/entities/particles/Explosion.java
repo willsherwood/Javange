@@ -1,6 +1,7 @@
 package sherwood.demo.entities.particles;
 
 import sherwood.demo.entities.Drawable;
+import sherwood.demo.entities.Effect;
 import sherwood.demo.entities.Mover;
 import sherwood.demo.entities.Stepper;
 import sherwood.demo.physics.BoundingBox;
@@ -9,7 +10,7 @@ import sherwood.inputs.keyboard.control.Control;
 
 import java.util.EnumSet;
 
-public class Explosion implements Stepper, Drawable, Mover {
+public class Explosion implements Stepper, Drawable, Mover, Effect {
 
     private BoundingBox bounds;
     private Vector velocity;

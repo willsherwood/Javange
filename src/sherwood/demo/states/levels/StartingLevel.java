@@ -33,7 +33,7 @@ public class StartingLevel extends LevelState {
     public void init () {
         GameScreen.get().requestKeyInputMechanism(new MixedKeyboardInput(EnumSet.of(Control.LEFT, Control.RIGHT, Control.UP, Control.DOWN, Control.A)));
         GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm(60));
-        Sound.PATHETIQUE.play();
+//        Sound.PATHETIQUE.play();
     }
 
     private void reset () {
