@@ -8,7 +8,7 @@ import sherwood.inputs.keyboard.control.Control;
 
 import java.util.EnumSet;
 
-public class Controller implements Stepper {
+public class Controller implements Stepper, Effect {
     @Override
     public void step (EnumSet<Control> keys) {
         if (keys.contains(Control.SELECT)) {
