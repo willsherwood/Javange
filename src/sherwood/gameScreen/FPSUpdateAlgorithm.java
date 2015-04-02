@@ -38,8 +38,8 @@ public class FPSUpdateAlgorithm implements UpdateAlgorithm {
         screenState.step(input.keys());
         screenState.draw(graphics);
         gameScreen.paintToBuffer(map);
-        graphics.setColor(Color.WHITE);
-        graphics.drawString(String.format("FPS: %.1f", 1000 / time), GameScreen.WIDTH - 80, GameScreen.HEIGHT - 20);
+        graphics.setColor(Color.RED);
+        graphics.drawString(String.format("FPS: %.1f", 1000 / time), 80, 20);
         t2 = System.currentTimeMillis();
         ThreadUtil.sleep(1000 / fps - (t2 - t1));
         time = time * (1.0 - weight) + (System.currentTimeMillis() - t1) * weight;

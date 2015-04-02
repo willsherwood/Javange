@@ -1,6 +1,5 @@
 package sherwood.demo.states.levels;
 
-import sherwood.audio.Sound;
 import sherwood.demo.entities.Drawable;
 import sherwood.demo.entities.baddies.Spike;
 import sherwood.demo.entities.blocks.Block;
@@ -33,30 +32,19 @@ public class StartingLevel extends LevelState {
     public void init () {
         GameScreen.get().requestKeyInputMechanism(new MixedKeyboardInput(EnumSet.of(Control.LEFT, Control.RIGHT, Control.UP, Control.DOWN, Control.A)));
         GameScreen.get().requestUpdateAlgorithm(new FPSUpdateAlgorithm(60));
-        Sound.PATHETIQUE.play();
+        //Sound.PATHETIQUE.play();
     }
 
     private void reset () {
         // starts player 2 blocks above the center of the bottom of the screen
-        Vector playerStart = new Vector(GameScreen.WIDTH / 2 - PlayerMovement.size.x() / 2,
-                GameScreen.HEIGHT - 64 - PlayerMovement.size.y());
+        Vector playerStart = new Vector(32 * 2 + 8, GameScreen.HEIGHT - 32 * 2 - PlayerMovement.size.y());
         level = new HardViewportLevel(4, 2, playerStart);
 
-        for (int i=0; i<GameScreen.WIDTH / 32 * 4; i++)
-            level.add(new Block(new Vector(i * 32, GameScreen.HEIGHT - 32), new Vector(32, 32)) {
-                @Override
-                public void draw (Graphics2D g, Vector position) {
-                    Drawable.paint(g, position, "Horizontal_Block");
-                }
-            }, 0);
+        for (int y=0; y<5; y++)
+            for (int x=0; x<6; x++)
+                level.add(new Block(new Vector(32 * 4 * x + 64, 32 + y * 4 * 32), new Vector(32, 32)), 0);
 
-        for (int i=0; i<GameScreen.WIDTH / 32 * 4; i+= Math.random() * 5 + 3)
-            level.add(new Spike(new BoundingBox(new Vector(i * 32, GameScreen.HEIGHT - 64), new Vector(32, 32)), Direction.UP) {
-                @Override
-                public void draw (Graphics2D g, Vector position) {
-                    Drawable.paint(g, position, "Cloud_Spike");
-                }
-            }, 0);
+        level.add(new Spike(new BoundingBox(32 * 4, GameScreen.HEIGHT - 32 * 2, 32, 32), Direction.DOWN), 0);
 
     }
 
