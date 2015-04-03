@@ -10,5 +10,11 @@ public enum Event {
     /**
      * called when the player dies
      */
-    playerDeath
+    playerDeath,
+
+    /**
+     * called when the player jumps
+     * can be used for spikes that move when there's a jump
+     */
+    playerJump
 }

@@ -2,8 +2,9 @@ package sherwood.demo.entities.player;
 
 import sherwood.demo.entities.*;
 import sherwood.demo.entities.baddies.Baddie;
-import sherwood.demo.entities.baddies.MovingSpike;
-import sherwood.demo.entities.baddies.Spike;
+import sherwood.demo.entities.baddies.spike.JumperSpike;
+import sherwood.demo.entities.baddies.spike.MovingSpike;
+import sherwood.demo.entities.baddies.spike.Spike;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
@@ -37,6 +38,9 @@ public class Player implements Collider, Stepper, Mover, Drawable {
         return movement.velocity();
     }
 
+    public void velocity(Vector nv) {
+        this.movement.changeVelocity(nv);
+    }
 
     @Override
     public BoundingBox bounds () {
@@ -46,6 +50,14 @@ public class Player implements Collider, Stepper, Mover, Drawable {
     @Override
     public void collide (Entity entity) {
         if (entity instanceof Baddie) {
+            if (entity instanceof JumperSpike) {
+                JumperSpike m = (JumperSpike) entity;
+                if (m.poly().intersects(bounds().x(), bounds().y(), bounds().width(), bounds().height())) {
+                    die();
+                    return;
+                } else return;
+            }
+
             if (entity instanceof MovingSpike) {
                 MovingSpike m = (MovingSpike) entity;
                 if (m.poly().intersects(bounds().x(), bounds().y(), bounds().width(), bounds().height())) {

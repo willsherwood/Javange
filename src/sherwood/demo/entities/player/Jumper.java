@@ -1,5 +1,8 @@
 package sherwood.demo.entities.player;
 
+import sherwood.demo.structures.levels.Level;
+import sherwood.demo.structures.levels.event.Event;
+
 public class Jumper {
 
     private static final double first_jump = -8.5;
@@ -20,8 +23,10 @@ public class Jumper {
         if (!jumping) {
             switch (jump) {
                 case 0:
+                    Level.currentLevel().activate(Event.playerJump);
                     pm.changeVelocity(pm.velocity().sy(first_jump));
                 case 1:
+                    Level.currentLevel().activate(Event.playerJump);
                     pm.changeVelocity(pm.velocity().sy(second_jump));
             }
             jump++;
