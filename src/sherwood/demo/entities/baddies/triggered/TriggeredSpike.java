@@ -1,7 +1,7 @@
 package sherwood.demo.entities.baddies.triggered;
 
 import sherwood.demo.entities.Triggered;
-import sherwood.demo.entities.baddies.MovingSpike;
+import sherwood.demo.entities.baddies.spike.MovingSpike;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Vector;
 import sherwood.inputs.keyboard.control.Control;

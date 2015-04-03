@@ -1,21 +1,26 @@
-package sherwood.demo.entities.baddies;
+package sherwood.demo.entities.baddies.spike;
 
-import sherwood.demo.graphics.SpriteBox;
+import sherwood.demo.entities.Drawable;
+import sherwood.demo.entities.Entity;
+import sherwood.demo.entities.baddies.MovingBaddie;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
+import sherwood.inputs.keyboard.control.Control;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Polygon;
+import java.util.EnumSet;
 
-public class Spike extends Baddie {
+public class MovingSpike extends MovingBaddie {
 
     private final Direction face;
+    private Vector initialPosition;
 
-    public Spike (BoundingBox bounds, Direction face) {
-        super(bounds.resize(bounds.width(), bounds.height() - 1));
-        this.face = face;
+    public MovingSpike (BoundingBox bounds, Vector velocity) {
+        super(bounds, velocity);
+        this.face = Direction.UP;
+        this.initialPosition = bounds.position();
     }
 
     public Polygon poly () {
@@ -39,9 +44,23 @@ public class Spike extends Baddie {
     }
 
     @Override
+    public void step (EnumSet<Control> keys) {
+        moveTo(bounds().position().over(velocity()));
+        if (bounds().position().y() < initialPosition.y()) {
+            velocity(velocity().negate());
+            moveTo(initialPosition);
+        } else if (bounds().position().y() > initialPosition.y() + bounds().height()) {
+            velocity(velocity().negate());
+            moveTo(initialPosition.over(bounds().size().sx(0)));
+        }
+    }
+
+    @Override
+    public void collide (Entity entity) {
+    }
+
+    @Override
     public void draw (Graphics2D g, Vector position) {
-        Image sprite = SpriteBox.instance().sprite("res/img/Cloud_Spike.png");
-        int dx = (face.x() == 0 ? 1 : -1), dy = (face.y() == 0 ? 1 : -1);
-        g.drawImage(sprite, position.xc(), position.yc() + (dy == -1 ? 32 : 0), 32 * dx, 32 * dy, null);
+        Drawable.tile(g, position, this, "Spike");
     }
 }

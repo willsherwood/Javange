@@ -1,8 +1,12 @@
 package sherwood.demo.states.levels;
 
 import sherwood.demo.entities.Drawable;
-import sherwood.demo.entities.baddies.Spike;
+import sherwood.demo.entities.Triggered;
+import sherwood.demo.entities.baddies.spike.JumperSpike;
+import sherwood.demo.entities.baddies.spike.Spike;
+import sherwood.demo.entities.baddies.wire.Wire;
 import sherwood.demo.entities.blocks.Block;
+import sherwood.demo.entities.level1.Wind;
 import sherwood.demo.entities.particles.Explosion;
 import sherwood.demo.entities.player.PlayerMovement;
 import sherwood.demo.physics.BoundingBox;
@@ -19,12 +23,17 @@ import sherwood.inputs.keyboard.control.MixedKeyboardInput;
 
 import java.awt.Graphics2D;
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
 
 public class StartingLevel extends LevelState {
 
     private Level level;
 
+    private Set<Triggered> jumpSpikes;
+
     public StartingLevel () {
+        jumpSpikes = new HashSet<>();
         reset();
     }
 
@@ -45,7 +54,14 @@ public class StartingLevel extends LevelState {
                 level.add(new Block(new Vector(32 * 4 * x + 64, 32 + y * 4 * 32), new Vector(32, 32)), 0);
 
         level.add(new Spike(new BoundingBox(32 * 4, GameScreen.HEIGHT - 32 * 2, 32, 32), Direction.DOWN), 0);
+        level.add(new Wire(new Vector(32*3, GameScreen.HEIGHT - 32 * 5 - 32 / 2), 32 * 3), -1);
 
+        level.add(new Wind(new Vector(0, 0)), -8);
+
+        jumpSpikes.clear();
+        jumpSpikes.add(new JumperSpike(new BoundingBox(32 * 6, GameScreen.HEIGHT - 32 * 3, 32, 32), true));
+        for (Triggered p : jumpSpikes)
+            level.add(p, -1);
     }
 
     @Override
@@ -59,6 +75,9 @@ public class StartingLevel extends LevelState {
                 for (int i=0; i<1000; i++)
                     level.add(new Explosion(new Vector(level.player().bounds().x(), level.player().bounds().y()), new Vector(3, 3)), 999);
                 level.remove(level.player());
+                break;
+            case playerJump:
+                jumpSpikes.forEach(a -> a.trigger());
                 break;
         }
     }
