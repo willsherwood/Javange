@@ -53,6 +53,7 @@ public class Player implements Collider, Stepper, Mover, Drawable {
             if (entity instanceof JumperSpike) {
                 JumperSpike m = (JumperSpike) entity;
                 if (m.poly().intersects(bounds().x(), bounds().y(), bounds().width(), bounds().height())) {
+                    System.out.println("a");
                     die();
                     return;
                 } else return;
@@ -61,6 +62,7 @@ public class Player implements Collider, Stepper, Mover, Drawable {
             if (entity instanceof MovingSpike) {
                 MovingSpike m = (MovingSpike) entity;
                 if (m.poly().intersects(bounds().x(), bounds().y(), bounds().width(), bounds().height())) {
+                    System.out.println("b");
                     die();
                     return;
                 } else return;
@@ -74,6 +76,7 @@ public class Player implements Collider, Stepper, Mover, Drawable {
                     return;
             }
             // uh-oh! We're dead.
+            System.out.println("c");
             die();
         }
         if (entity instanceof Block) {

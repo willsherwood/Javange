@@ -48,6 +48,8 @@ public class StartingLevel extends LevelState {
     private void reset () {
         // starts player 2 blocks above the center of the bottom of the screen
         Vector playerStart = new Vector(32 * 2 + 8, GameScreen.HEIGHT - 32 * 2 - PlayerMovement.size.y());
+        playerStart = new Vector(32 * 10 + 8, GameScreen.HEIGHT - 32 * 7 - PlayerMovement.size.y());
+
         level = new HardViewportLevel(4, 2, playerStart);
 
         for (int y=0; y<5; y++)
@@ -60,6 +62,19 @@ public class StartingLevel extends LevelState {
         level.add(new Wind(new Vector(0, 0)), -8);
 
         level.add(new SpikeBar(new Vector(32 * 4, GameScreen.HEIGHT - 5 * 32 - 8)), -1);
+        level.add(new SpikeBar(new Vector(32 * 4, GameScreen.HEIGHT - 9 * 32 + 8)), -1);
+
+        level.add(new SpikeBar(new BoundingBox(32 * 6, GameScreen.HEIGHT - 9 * 32, 32, 32)) {
+            @Override
+            public void draw (Graphics2D g, Vector position) {
+                Drawable.paint(g, position, "SpikeBar32");
+            }
+        }, -1);
+        level.add(new Spike(new BoundingBox(32 * 6, GameScreen.HEIGHT - 8*32, 32, 32), Direction.DOWN), 1);
+
+
+        level.add(new Spike(new BoundingBox(32 * 4, GameScreen.HEIGHT - 10*32 + 8, 32, 32), Direction.UP), 1);
+
 
         level.add(new Spike(new BoundingBox(32 * 7, GameScreen.HEIGHT - 6*32, 32, 32), Direction.RIGHT), 1);
         level.add(new Spike(new BoundingBox(32 * 9, GameScreen.HEIGHT - 6*32, 32, 32), Direction.LEFT), 1);

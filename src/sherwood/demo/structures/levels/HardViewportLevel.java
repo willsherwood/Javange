@@ -1,6 +1,7 @@
 package sherwood.demo.structures.levels;
 
 import sherwood.demo.entities.*;
+import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.entities.player.Player;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Vector;
@@ -70,6 +71,8 @@ public class HardViewportLevel implements Level {
                 .map(DepthEntity::entity)
                 .filter(a -> !(a instanceof Effect))
                 .collect(Collectors.toSet()))
+                .stream()
+                .sorted((a,b) -> (a.first() instanceof Block || a.second() instanceof Block) ? -1 : 0)
                 .forEach(a -> {
                     ((Collider) a.first()).collide(a.second());
                     if (a.second() instanceof Collider)

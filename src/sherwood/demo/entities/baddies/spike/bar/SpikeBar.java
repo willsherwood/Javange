@@ -13,6 +13,10 @@ public class SpikeBar extends Baddie {
         super(new BoundingBox(position, new Vector(32, 108)));
     }
 
+    public SpikeBar(BoundingBox bounds) {
+        super(bounds);
+    }
+
     @Override
     public void draw (Graphics2D g, Vector position) {
         Drawable.paint(g, position, "SpikeBar");
