@@ -5,11 +5,13 @@ import sherwood.demo.entities.Triggered;
 import sherwood.demo.entities.baddies.spike.JumperSpike;
 import sherwood.demo.entities.baddies.spike.Spike;
 import sherwood.demo.entities.baddies.spike.bar.SpikeBar;
+import sherwood.demo.entities.baddies.triggered.TriggeredSpike;
 import sherwood.demo.entities.baddies.wire.Wire;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.entities.level1.Wind;
 import sherwood.demo.entities.particles.Explosion;
 import sherwood.demo.entities.player.PlayerMovement;
+import sherwood.demo.entities.trigger.CollisionTrigger;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
@@ -79,10 +81,20 @@ public class StartingLevel extends LevelState {
         level.add(new Spike(new BoundingBox(32 * 7, GameScreen.HEIGHT - 6*32, 32, 32), Direction.RIGHT), 1);
         level.add(new Spike(new BoundingBox(32 * 9, GameScreen.HEIGHT - 6*32, 32, 32), Direction.LEFT), 1);
 
+        Set<Triggered> trig = new HashSet<>();
+        trig.add(new TriggeredSpike(new BoundingBox(32 * 2, GameScreen.HEIGHT, 32, 32), new Vector(0, -18)));
+        trig.add(new TriggeredSpike(new BoundingBox(32 * 3, GameScreen.HEIGHT, 32, 32), new Vector(0, -18)));
+        trig.add(new TriggeredSpike(new BoundingBox(32 * 4, GameScreen.HEIGHT, 32, 32), new Vector(0, -18)));
+
+        trig.add(new JumperSpike(new BoundingBox(32*2, GameScreen.HEIGHT - 11 * 32, 32, 32), true));
+
+        level.add(new CollisionTrigger(new BoundingBox(32 * 2, GameScreen.HEIGHT - 6 * 32 - 4, 32, 8), trig), 1);
 
         jumpSpikes.clear();
         jumpSpikes.add(new JumperSpike(new BoundingBox(32 * 6, GameScreen.HEIGHT - 32 * 3, 32, 32), true));
         for (Triggered p : jumpSpikes)
+            level.add(p, -1);
+        for (Triggered p : trig)
             level.add(p, -1);
     }
 

@@ -25,8 +25,10 @@ public class CollisionTrigger implements Collider {
 
     @Override
     public void collide (Entity entity) {
-        if (entity instanceof Player)
+        if (entity instanceof Player) {
             things.forEach(Triggered::trigger);
+            things.clear();
+        }
     }
 
     @Override
