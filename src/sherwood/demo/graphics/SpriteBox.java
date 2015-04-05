@@ -1,21 +1,21 @@
 package sherwood.demo.graphics;
 
 import javax.imageio.ImageIO;
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SpriteBox {
 
-    private Map<String, Image> preloaded;
+    private Map<String, BufferedImage> preloaded;
 
-    public Image sprite (String name) {
+    public BufferedImage sprite (String name) {
         return preloaded.computeIfAbsent(name, SpriteBox::load);
 
     }
 
-    private static Image load (String name) {
+    private static BufferedImage load (String name) {
         try {
             return ImageIO.read(new File(name));
         } catch (Exception e) {
