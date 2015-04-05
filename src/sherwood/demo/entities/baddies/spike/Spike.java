@@ -7,8 +7,8 @@ import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Polygon;
+import java.awt.image.BufferedImage;
 
 public class Spike extends Baddie {
 
@@ -41,8 +41,8 @@ public class Spike extends Baddie {
 
     @Override
     public void draw (Graphics2D g, Vector position) {
-        Image sprite = SpriteBox.instance().sprite("res/img/Cloud_Spike.png");
-        int dx = (face.x() == 0 ? 1 : -1), dy = (face.y() == 0 ? 1 : -1);
-        g.drawImage(sprite, position.xc(), position.yc() + (dy == -1 ? 32 : 0), 32 * dx, 32 * dy, null);
+        //g.fillPolygon(poly());
+        BufferedImage sprite = SpriteBox.instance().sprite("res/img/spikes/CloudSpike" + face + ".png");
+        g.drawImage(sprite, position.xc(), position.yc(), 32, 32, null);
     }
 }

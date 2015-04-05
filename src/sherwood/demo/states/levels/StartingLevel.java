@@ -4,6 +4,7 @@ import sherwood.demo.entities.Drawable;
 import sherwood.demo.entities.Triggered;
 import sherwood.demo.entities.baddies.spike.JumperSpike;
 import sherwood.demo.entities.baddies.spike.Spike;
+import sherwood.demo.entities.baddies.spike.bar.SpikeBar;
 import sherwood.demo.entities.baddies.wire.Wire;
 import sherwood.demo.entities.blocks.Block;
 import sherwood.demo.entities.level1.Wind;
@@ -57,6 +58,12 @@ public class StartingLevel extends LevelState {
         level.add(new Wire(new Vector(32*3, GameScreen.HEIGHT - 32 * 5 - 32 / 2), 32 * 3), -1);
 
         level.add(new Wind(new Vector(0, 0)), -8);
+
+        level.add(new SpikeBar(new Vector(32 * 4, GameScreen.HEIGHT - 5 * 32 - 8)), -1);
+
+        level.add(new Spike(new BoundingBox(32 * 7, GameScreen.HEIGHT - 6*32, 32, 32), Direction.RIGHT), 1);
+        level.add(new Spike(new BoundingBox(32 * 9, GameScreen.HEIGHT - 6*32, 32, 32), Direction.LEFT), 1);
+
 
         jumpSpikes.clear();
         jumpSpikes.add(new JumperSpike(new BoundingBox(32 * 6, GameScreen.HEIGHT - 32 * 3, 32, 32), true));

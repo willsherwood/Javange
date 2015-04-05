@@ -6,6 +6,7 @@ import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Vector;
 import sherwood.inputs.keyboard.control.Control;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.util.EnumSet;
@@ -56,7 +57,8 @@ public class JumperSpike extends MovingBaddie implements Triggered {
 
     @Override
     public void draw (Graphics2D g, Vector position) {
-        g.drawPolygon(poly());
+        g.setColor(Color.GRAY);
+        g.fillPolygon(poly());
         //Drawable.paint(g, position, "Spike");
     }
 
