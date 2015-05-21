@@ -1,8 +1,8 @@
 package sherwood.demo.structures;
 
 public class Pair<A, B> {
-    private final A a;
-    private final B b;
+    public final A a;
+    public final B b;
 
     public Pair (A a, B b) {
         this.a = a;
