@@ -6,20 +6,19 @@ import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
 
-import java.awt.Graphics2D;
-import java.awt.Polygon;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Spike extends Baddie {
 
     private final Direction face;
 
-    public Spike (BoundingBox bounds, Direction face) {
+    public Spike(BoundingBox bounds, Direction face) {
         super(bounds.resize(bounds.width(), bounds.height() - 1));
         this.face = face;
     }
 
-    public Polygon poly () {
+    public Polygon poly() {
         int[] x, y;
         if (face.vertical()) {
             x = new int[]{bounds().position().xc(), bounds().position().xc() + bounds().size().xc() / 2, bounds().position().xc() + bounds().size().xc()};
@@ -40,9 +39,8 @@ public class Spike extends Baddie {
     }
 
     @Override
-    public void draw (Graphics2D g, Vector position) {
-        //g.fillPolygon(poly());
+    public void draw(Graphics2D g, Vector position) {
         BufferedImage sprite = SpriteBox.instance().sprite("res/img/spikes/CloudSpike" + face + ".png");
-        g.drawImage(sprite, position.xc(), position.yc(), 32, 32, null);
+        g.drawImage(sprite, position.xc(), position.yc(), (int) bounds().width(), (int) bounds().height(), null);
     }
 }
