@@ -13,6 +13,7 @@ public class CollisionTrigger implements Collider {
 
     private final Collection<Triggered> things;
     private final BoundingBox position;
+    private boolean clearing;
 
     public CollisionTrigger(BoundingBox position, Collection<Triggered> things) {
         this.position = position;
@@ -23,16 +24,22 @@ public class CollisionTrigger implements Collider {
         this(position, Collections.singleton(thing));
     }
 
+    public CollisionTrigger(BoundingBox position, Collection<Triggered> things, boolean clearing) {
+        this(position, things);
+        this.clearing = clearing;
+    }
+
     @Override
-    public void collide (Entity entity) {
+    public void collide(Entity entity) {
         if (entity instanceof Player) {
             things.forEach(Triggered::trigger);
-            things.clear();
+            if (clearing)
+                things.clear();
         }
     }
 
     @Override
-    public BoundingBox bounds () {
+    public BoundingBox bounds() {
         return position;
     }
 }
