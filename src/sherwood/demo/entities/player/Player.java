@@ -6,6 +6,7 @@ import sherwood.demo.entities.baddies.spike.JumperSpike;
 import sherwood.demo.entities.baddies.spike.MovingSpike;
 import sherwood.demo.entities.baddies.spike.Spike;
 import sherwood.demo.entities.blocks.Block;
+import sherwood.demo.entities.switches.SwitchingSpike;
 import sherwood.demo.physics.BoundingBox;
 import sherwood.demo.physics.Direction;
 import sherwood.demo.physics.Vector;
@@ -13,7 +14,7 @@ import sherwood.demo.structures.levels.Level;
 import sherwood.demo.structures.levels.event.Event;
 import sherwood.inputs.keyboard.control.Control;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.util.EnumSet;
 
 public class Player implements Collider, Stepper, Mover, Drawable {
@@ -21,20 +22,20 @@ public class Player implements Collider, Stepper, Mover, Drawable {
     private PlayerMovement movement;
     private PlayerSprite sprite;
 
-    public Player (Vector start) {
+    public Player(Vector start) {
         movement = new PlayerMovement(start);
         sprite = new PlayerSprite(this);
     }
 
     @Override
-    public void step (EnumSet<Control> keys) {
+    public void step(EnumSet<Control> keys) {
         sprite.step();
         movement.step(keys);
         movement.addVelocity();
     }
 
     @Override
-    public Vector velocity () {
+    public Vector velocity() {
         return movement.velocity();
     }
 
@@ -43,17 +44,16 @@ public class Player implements Collider, Stepper, Mover, Drawable {
     }
 
     @Override
-    public BoundingBox bounds () {
+    public BoundingBox bounds() {
         return movement.bounds();
     }
 
     @Override
-    public void collide (Entity entity) {
+    public void collide(Entity entity) {
         if (entity instanceof Baddie) {
             if (entity instanceof JumperSpike) {
                 JumperSpike m = (JumperSpike) entity;
                 if (m.poly().intersects(bounds().x(), bounds().y(), bounds().width(), bounds().height())) {
-                    System.out.println("a");
                     die();
                     return;
                 } else return;
@@ -62,12 +62,14 @@ public class Player implements Collider, Stepper, Mover, Drawable {
             if (entity instanceof MovingSpike) {
                 MovingSpike m = (MovingSpike) entity;
                 if (m.poly().intersects(bounds().x(), bounds().y(), bounds().width(), bounds().height())) {
-                    System.out.println("b");
                     die();
                     return;
                 } else return;
             }
             if (entity instanceof Spike) {
+                if (entity instanceof SwitchingSpike)
+                    if (!((SwitchingSpike) entity).isOn())
+                        return;
                 // if its a spike we need to check to see if they are really colliding
                 // because spike is represented by a square bounding box however
                 // it still has a triangular shape
@@ -76,7 +78,6 @@ public class Player implements Collider, Stepper, Mover, Drawable {
                     return;
             }
             // uh-oh! We're dead.
-            System.out.println("c");
             die();
         }
         if (entity instanceof Block) {
@@ -90,15 +91,15 @@ public class Player implements Collider, Stepper, Mover, Drawable {
     }
 
     @Override
-    public void draw (Graphics2D g, Vector position) {
+    public void draw(Graphics2D g, Vector position) {
         sprite.draw(g, position);
     }
 
-    private void die () {
+    private void die() {
         Level.currentLevel().activate(Event.playerDeath);
     }
 
-    public Direction direction () {
+    public Direction direction() {
         return movement.direction();
     }
 }
