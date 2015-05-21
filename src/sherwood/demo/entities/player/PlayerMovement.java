@@ -20,7 +20,7 @@ public class PlayerMovement {
     private Jumper jumper;
     private Direction direction = Direction.RIGHT;
 
-    public PlayerMovement (Vector start) {
+    public PlayerMovement(Vector start) {
         actions = new EnumMap<>(Control.class);
         velocity = Vector.ZERO;
         actions.put(Control.LEFT, () -> {
@@ -35,7 +35,7 @@ public class PlayerMovement {
         jumper = new Jumper(this);
     }
 
-    public void step (EnumSet<Control> controls) {
+    public void step(EnumSet<Control> controls) {
         velocity = velocity.sx(0);
         velocity = velocity.dy(.3).cy(9);
         controls.forEach(a -> actions.getOrDefault(a, () -> {
@@ -47,11 +47,11 @@ public class PlayerMovement {
         }
     }
 
-    public Vector velocity () {
+    public Vector velocity() {
         return velocity;
     }
 
-    public void verticalCollision (Entity entity) {
+    public void verticalCollision(Entity entity) {
         if (velocity.y() >= 0) /* falling */ {
             position = new Vector(position.x(), entity.bounds().position().y() - bounds().height());
             jumper.reset();
@@ -62,7 +62,7 @@ public class PlayerMovement {
         velocity = velocity.sy(0);
     }
 
-    public void horizontalCollision (Entity entity) {
+    public void horizontalCollision(Entity entity) {
         if (velocity.x() > 0) {
             position = new Vector(entity.bounds().position().x() - bounds().width(), position.y());
             velocity = velocity.sx(0);
@@ -72,25 +72,25 @@ public class PlayerMovement {
         velocity = velocity.sx(0);
     }
 
-    public BoundingBox bounds () {
+    public BoundingBox bounds() {
         return new BoundingBox(position, size);
     }
 
     /**
      * changes the position to one step of velocity
      */
-    public void addVelocity () {
+    public void addVelocity() {
         position = position.over(velocity);
     }
 
     /**
      * changes this.velocity to velocity
      */
-    public void changeVelocity (Vector velocity) {
+    public void changeVelocity(Vector velocity) {
         this.velocity = velocity;
     }
 
-    public Direction direction () {
+    public Direction direction() {
         return direction;
     }
 }

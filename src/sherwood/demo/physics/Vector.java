@@ -118,4 +118,18 @@ public class Vector {
     public Vector times (int i) {
         return new Vector(x*i, y*i);
     }
+
+    /**
+     * @return a vector with a y-value of the current modulo the parameter
+     */
+    public Vector my(double y) {
+        return new Vector(x, this.y % y);
+    }
+
+    /**
+     * @return a vector with a x-value of the current modulo the parameter
+     */
+    public Vector mx(double x) {
+        return new Vector(this.x % x, y);
+    }
 }
