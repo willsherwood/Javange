@@ -9,7 +9,7 @@ import javax.swing.SwingUtilities;
 
 public class Main {
 
-    public static ScreenState DEFAULT_SCREENSTATE = new FadeInLevel(new StartingLevel(), 6000);
+    public static ScreenState DEFAULT_SCREENSTATE = new FadeInLevel(new StartingLevel(), 100);
 
     public static void main (String[] args) {
         SwingUtilities.invokeLater(() -> GameScreen.start(DEFAULT_SCREENSTATE, "Kayin.pyoko"));

@@ -1,4 +1,4 @@
-package sherwood.demo.entities.player.backpack;
+package sherwood.demo.game.structures.backpack;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ public class Backpack {
         instance = new Backpack();
     }
 
-    public static Backpack Backpack() {
+    public static Backpack instance () {
         return instance;
     }
 
