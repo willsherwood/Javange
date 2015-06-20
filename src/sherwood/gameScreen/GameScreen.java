@@ -1,5 +1,6 @@
 package sherwood.gameScreen;
 
+import sherwood.demo.game.graphics.SpriteBox;
 import sherwood.gameScreen.map.Mapping;
 import sherwood.inputs.keyboard.KeyboardInput;
 import sherwood.iohandlers.ConfigHandler;
@@ -33,6 +34,7 @@ public class GameScreen extends JFrame {
         setTitle(windowTitle);
         this.screenState = screenState;
         this.drawComponent = new DrawComponent();
+        this.setIconImage(SpriteBox.instance().sprite("res/img/player/idle/idle0.png"));
 
         addWindowListener(new WindowAdapter() {
             @Override
