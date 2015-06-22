@@ -87,4 +87,9 @@ public class ScrollingViewportLevel extends LevelState implements Level {
     public Player player () {
         return player;
     }
+
+    @Override
+    public Level underlyingLevel () {
+        return this;
+    }
 }
