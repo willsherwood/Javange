@@ -31,4 +31,8 @@ public abstract class LevelState extends ScreenState {
     public void step (EnumSet<Control> keys) {
         pack.step(keys);
     }
+
+    public Level underlyingLevel() {
+        throw new RuntimeException("This level does not have an underlying structure . . .");
+    }
 }
