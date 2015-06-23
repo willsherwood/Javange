@@ -19,15 +19,19 @@ public class LayoutTestingLevel extends LevelState {
     private Level level;
 
     public LayoutTestingLevel () {
-        level = new HardViewportLevel(1, 1, new Vector(300, 300));
         reset();
     }
 
     private void reset () {
+        level = new HardViewportLevel(1, 1, new Vector(100, 10));
+
         Layout layout = new ContiguousLayout();
         layout.add(new BoundingBox(100, 100, 100, 50));
         layout.add(new BoundingBox(150, 50, 100, 50));
-        layout.add(new BoundingBox(125, 100, 50, 100));
+        layout.add(new BoundingBox(125, 150, 50, 100));
+        layout.add(new BoundingBox(175, 175, 125, 25));
+        layout.add(new BoundingBox(175, 225, 125, 25));
+
         level.add(layout, 0); // TODO: prioritize collisions with player
         level.add(new Block(new Vector(0, GameScreen.HEIGHT - 50), new Vector(GameScreen.WIDTH, 50)), 0);
     }
@@ -60,3 +64,10 @@ public class LayoutTestingLevel extends LevelState {
         Drawable.draw(g, level.entities());
     }
 }
+
+// maybe the layout should just be for the drawing phase
+// but it will have a method
+// blocks()
+// and that is what is added to the quadtree
+// but it is drawn separately
+// yes. this is good.
