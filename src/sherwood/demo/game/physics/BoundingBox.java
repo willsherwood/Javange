@@ -1,11 +1,16 @@
 package sherwood.demo.game.physics;
 
+import sherwood.demo.game.entities.Entity;
+
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 /**
  * An immutable object representing an axis-aligned bounding box
  */
-public class BoundingBox {
+public class BoundingBox implements Entity {
 
     private Vector position, size;
 
@@ -58,5 +63,18 @@ public class BoundingBox {
 
     public BoundingBox resize (double width, double height) {
         return new BoundingBox(position, new Vector(width, height));
+    }
+
+    public void draw (Graphics2D g) {
+        g.setColor(new Color(hashCode()));
+        g.draw(rect());
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
+        g.fill(rect());
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+    }
+
+    @Override
+    public BoundingBox bounds () {
+        return this;
     }
 }
