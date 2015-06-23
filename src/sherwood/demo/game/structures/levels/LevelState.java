@@ -33,6 +33,6 @@ public abstract class LevelState extends ScreenState {
     }
 
     public Level underlyingLevel() {
-        throw new RuntimeException("This level does not have an underlying structure . . .");
+        throw new RuntimeException("This level (" + getClass() + ") does not have an underlying structure . . .");
     }
 }
