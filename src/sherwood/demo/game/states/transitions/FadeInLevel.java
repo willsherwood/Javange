@@ -1,5 +1,6 @@
 package sherwood.demo.game.states.transitions;
 
+import sherwood.demo.game.structures.levels.Level;
 import sherwood.demo.game.structures.levels.LevelState;
 import sherwood.demo.game.structures.levels.event.Event;
 import sherwood.gameScreen.GameScreen;
@@ -46,5 +47,10 @@ public class FadeInLevel extends LevelState {
     public void init() {
         super.init();
         state.init();
+    }
+
+    @Override
+    public Level underlyingLevel () {
+        return state.underlyingLevel();
     }
 }
