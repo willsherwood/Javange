@@ -115,7 +115,7 @@ public class Vector {
     /**
      * @return a vector multiplied by the scalar i
      */
-    public Vector times (int i) {
+    public Vector times (double i) {
         return new Vector(x*i, y*i);
     }
 

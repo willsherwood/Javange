@@ -29,7 +29,7 @@ public class HardViewportLevel extends LevelState implements Level {
         entities = new PriorityQueue<>();
         factory = new CollisionFactory(new Vector(rows * GameScreen.WIDTH, columns * GameScreen.HEIGHT));
         player = new Player(playerStart);
-        add(player, 999);
+        add(player, 100);
         add(new Controller(), 0);
     }
 

@@ -35,7 +35,7 @@ public class Stage extends LevelState {
         for (int i = 9; i < GameScreen.WIDTH; i += 94) {
             level.add(new BossBlock(new Vector(i, GameScreen.HEIGHT - 128), new Vector(32, 32)), 0);
             JumperSpike k = new JumperSpike(new BoundingBox(new Vector(i, GameScreen.HEIGHT - 128), new Vector(32, 32)), false);
-            level.add(k, 5);
+            level.add(k, 1);
             spikeTriggers.add(k);
         }
         penny = new Penny();
