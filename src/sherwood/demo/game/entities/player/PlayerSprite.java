@@ -5,6 +5,7 @@ import sherwood.demo.game.graphics.SpriteBox;
 import sherwood.demo.game.physics.Direction;
 import sherwood.demo.game.physics.Vector;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
@@ -26,6 +27,10 @@ public class PlayerSprite {
     }
 
     public void draw (Graphics2D g, Vector position) {
+        g.setColor(Color.MAGENTA);
+        g.fillRect(position.xc(), position.yc(), 11, 21);
+        if (Math.random() < 5)
+        return;
         if (player.direction() == Direction.RIGHT) {
             if (player.velocity().y() >= 1) {
                 // falling right

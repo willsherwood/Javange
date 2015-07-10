@@ -22,6 +22,10 @@ public abstract class LevelState extends ScreenState {
      */
     public abstract void activate (Event event);
 
+    public void activate(Event event, int data) {
+        activate(event);
+    }
+
     @Override
     public void draw (Graphics2D g) {
         pack.draw(g, Vector.ZERO);

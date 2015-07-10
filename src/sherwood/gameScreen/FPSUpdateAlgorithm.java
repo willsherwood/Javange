@@ -1,5 +1,6 @@
 package sherwood.gameScreen;
 
+import sherwood.demo.game.structures.levels.Level;
 import sherwood.gameScreen.map.Mapping;
 import sherwood.inputs.keyboard.KeyboardInput;
 import sherwood.screenStates.ScreenState;
@@ -39,6 +40,7 @@ public class FPSUpdateAlgorithm implements UpdateAlgorithm {
         screenState.draw(graphics);
         graphics.setColor(Color.WHITE);
         graphics.drawString(String.format("FPS: %.1f", 1000 / time), GameScreen.WIDTH - 80, GameScreen.HEIGHT - 20);
+        graphics.drawString("Align: " + Level.currentLevel().underlyingLevel().player().bounds().position().x() % 3, GameScreen.WIDTH - 80, GameScreen.HEIGHT - 10);
         gameScreen.paintToBuffer(map);
         t2 = System.currentTimeMillis();
         ThreadUtil.sleep(1000 / fps - (t2 - t1));
