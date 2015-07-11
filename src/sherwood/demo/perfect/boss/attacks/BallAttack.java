@@ -52,7 +52,7 @@ public class BallAttack implements Drawable, Collider, Stepper {
         }
         Ellipse2D.Double self = new Ellipse2D.Double(position.x(), position.y(), radius * 2, radius * 2);
         if (self.intersects(entity.bounds().rect())) {
-            System.out.println("The player has died . . .");
+            Level.currentLevel().activate(Event.playerDeath);
         }
     }
 

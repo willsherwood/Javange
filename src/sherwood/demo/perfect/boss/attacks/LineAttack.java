@@ -7,6 +7,8 @@ import sherwood.demo.game.entities.Stepper;
 import sherwood.demo.game.entities.player.Player;
 import sherwood.demo.game.physics.BoundingBox;
 import sherwood.demo.game.physics.Vector;
+import sherwood.demo.game.structures.levels.Level;
+import sherwood.demo.game.structures.levels.event.Event;
 import sherwood.gameScreen.GameScreen;
 import sherwood.inputs.keyboard.control.Control;
 
@@ -33,6 +35,17 @@ public class LineAttack implements Drawable, Collider, Stepper {
         if (!(entity instanceof Player)) {
             return;
         }
+        double x2 = origin.x() + Math.cos(angle) * 10000;
+        double y2 = origin.y() + Math.sin(angle) * 10000;
+        Polygon outer;
+        if (!goRight && angle < Math.PI)
+            outer = new Polygon(new int[]{origin.xc(), GameScreen.WIDTH, GameScreen.WIDTH, 0, (int) x2}, new int[]{origin.yc(), origin.yc(), 0, 0, (int) y2}, 5);
+        else
+            outer = new Polygon(new int[]{origin.xc(), GameScreen.WIDTH, GameScreen.WIDTH, (int) x2}, new int[]{origin.yc(), origin.yc(), goRight ? GameScreen.HEIGHT : 0, (int) y2}, 4);
+        if (outer.intersects(Level.currentLevel().underlyingLevel().player().bounds().rect())) {
+            Level.currentLevel().activate(Event.playerDeath);
+        }
+
     }
 
     @Override
@@ -52,7 +65,7 @@ public class LineAttack implements Drawable, Collider, Stepper {
 
     @Override
     public BoundingBox bounds () {
-        return new BoundingBox(24, 12, 12, 12);
+        return new BoundingBox(0, 0, GameScreen.WIDTH, GameScreen.HEIGHT);
     }
 
     @Override

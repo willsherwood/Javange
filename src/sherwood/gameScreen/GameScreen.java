@@ -46,6 +46,7 @@ public class GameScreen extends JFrame {
         getContentPane().add(drawComponent);
         requestNewDimension(new Dimension(800, 608));
         setVisible(true);
+        setLocationRelativeTo(null);
 
         updateThread = new UpdateThread(this::getScreenState,
                 this::getGraphics2D, this::getKeyboardInput, GameScreen::get, this::getUpdateAlgorithm);
