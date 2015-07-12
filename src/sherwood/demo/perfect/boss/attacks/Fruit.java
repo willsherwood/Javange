@@ -10,6 +10,7 @@ import sherwood.demo.game.structures.levels.Level;
 import sherwood.demo.game.structures.levels.event.Event;
 import sherwood.inputs.keyboard.control.Control;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.util.EnumSet;
@@ -17,6 +18,8 @@ import java.util.EnumSet;
 public class Fruit extends MovingBaddie {
 
     public static int number;
+    public static int time = 20;
+    private int fade;
 
     public Fruit (Vector position) {
         super(new BoundingBox(position, new Vector(21, 22)), new Vector(number / 18. - 3, 3 + number / 5.));
@@ -29,6 +32,11 @@ public class Fruit extends MovingBaddie {
 
     public Fruit (Vector position, Vector size, Vector velocity) {
         super(new BoundingBox(position, size), velocity);
+    }
+
+    public Fruit (Vector position, boolean fade) {
+        this(position);
+        this.fade = fade ? 30 : 0;
     }
 
     @Override
@@ -50,6 +58,15 @@ public class Fruit extends MovingBaddie {
 
     @Override
     public void draw (Graphics2D g, Vector position) {
+
+        if (fade > 0) {
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1 - fade-- / 30f));
+            g.drawImage(SpriteBox.instance().sprite("res/img/Fruit.png"),
+                    position.xc(), position.yc(), (int) bounds().width(), (int) bounds().height(), null);
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            return;
+        }
+
         g.drawImage(SpriteBox.instance().sprite("res/img/Fruit.png"),
                 position.xc(), position.yc(), (int) bounds().width(), (int) bounds().height(), null);
 

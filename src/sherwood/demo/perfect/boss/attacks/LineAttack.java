@@ -77,4 +77,13 @@ public class LineAttack implements Drawable, Collider, Stepper {
         } else if (angle > maxAngle)
             angle = maxAngle;
     }
+
+    public void move(Vector newPosition) {
+        this.origin = newPosition;
+        maxAngle = (goRight ? Math.PI : -Math.PI) + Math.atan2(origin.y() - goThrough.y(), origin.x() - goThrough.x());
+    }
+
+    public Vector position () {
+        return origin;
+    }
 }
