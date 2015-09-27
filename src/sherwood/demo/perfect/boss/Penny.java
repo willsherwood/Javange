@@ -7,6 +7,7 @@ import sherwood.demo.game.physics.Vector;
 import sherwood.demo.game.structures.levels.Level;
 import sherwood.demo.game.structures.levels.event.Event;
 import sherwood.demo.perfect.boss.attacks.BallAttack;
+import sherwood.demo.perfect.boss.attacks.CosineFruit;
 import sherwood.demo.perfect.boss.attacks.Fruit;
 import sherwood.demo.perfect.boss.attacks.LineAttack;
 import sherwood.gameScreen.GameScreen;
@@ -110,7 +111,8 @@ public class Penny implements Stepper, Drawable {
             return;
         }
         if (phase >= 355) {
-
+            if (phase % 11 == 0)
+                Level.currentLevel().underlyingLevel().add(new CosineFruit(100), 10);
         }
         if (phase == 0) {
             velocity += box.position().x() < GameScreen.WIDTH / 2 ? 0.15 : -0.45;
@@ -122,6 +124,10 @@ public class Penny implements Stepper, Drawable {
             if (box.position().x() > GameScreen.WIDTH / 2 && velocity < 0)
                 phase++;
         }
+    }
+
+    public int phase () {
+        return phase;
     }
 
     @Override

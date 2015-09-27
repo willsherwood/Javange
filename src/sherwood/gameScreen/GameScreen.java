@@ -8,16 +8,14 @@ import sherwood.screenStates.ScreenState;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 public class GameScreen extends JFrame {
 
-    public static final int DEFAULT_TICKSPERSEC = 60;
+    public static final int DEFAULT_TICKSPERSEC = 50;
     public static int WIDTH = 800;
     public static int HEIGHT = 608;
     private static GameScreen game;
@@ -31,6 +29,8 @@ public class GameScreen extends JFrame {
     protected Thread updateThread;
 
     private GameScreen (ScreenState screenState, String windowTitle) {
+
+        setUndecorated(true);
         setTitle(windowTitle);
         this.screenState = screenState;
         this.drawComponent = new DrawComponent();
