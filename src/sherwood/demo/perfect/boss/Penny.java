@@ -111,8 +111,9 @@ public class Penny implements Stepper, Drawable {
             return;
         }
         if (phase >= 355) {
-            if (phase % 11 == 0)
-                Level.currentLevel().underlyingLevel().add(new CosineFruit(100), 10);
+            if (phase % 19 == 0)
+                Level.currentLevel().underlyingLevel().add(new CosineFruit(2.5), 10);
+            phase++;
         }
         if (phase == 0) {
             velocity += box.position().x() < GameScreen.WIDTH / 2 ? 0.15 : -0.45;

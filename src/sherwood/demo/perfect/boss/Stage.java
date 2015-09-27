@@ -105,6 +105,7 @@ public class Stage extends LevelState {
         private final int phase;
 
         public SkipAlgo (Container container, int phase) {
+            super(50);
             this.penny = container;
             this.phase = phase;
         }
@@ -112,10 +113,9 @@ public class Stage extends LevelState {
         @Override
         public void update (ScreenState screenState, Graphics2D graphics, GameScreen gameScreen, KeyboardInput input) {
             super.update(screenState, graphics, gameScreen, input);
-            System.out.println(penny.penny.phase());
             while (penny.penny.phase() < phase) {
                 screenState.step(input.keys());
-                screenState.draw(graphics);
+                graphics.drawString("phase: " + penny.penny.phase(), 100, 100);
             }
         }
     }

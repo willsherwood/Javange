@@ -58,7 +58,6 @@ public class Fruit extends MovingBaddie {
 
     @Override
     public void draw (Graphics2D g, Vector position) {
-
         if (fade > 0) {
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1 - fade-- / 30f));
             g.drawImage(SpriteBox.instance().sprite("res/img/Fruit.png"),
@@ -69,13 +68,5 @@ public class Fruit extends MovingBaddie {
 
         g.drawImage(SpriteBox.instance().sprite("res/img/Fruit.png"),
                 position.xc(), position.yc(), (int) bounds().width(), (int) bounds().height(), null);
-
-        // test hit box
-//        g.setColor(Color.YELLOW);
-//        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-//        int ratio = (int) (bounds().width() / 21);
-//        g.fillOval(position.xc() + ratio, position.yc() + ratio, (int) bounds().width() - 2 * ratio, (int) bounds().height() - 2 * ratio);
-//        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
     }
 }
