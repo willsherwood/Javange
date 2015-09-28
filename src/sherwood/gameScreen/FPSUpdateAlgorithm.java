@@ -41,9 +41,6 @@ public class FPSUpdateAlgorithm implements UpdateAlgorithm {
         screenState.draw(graphics);
         graphics.setColor(Color.WHITE);
         graphics.drawString(String.format("FPS: %.1f", 1000 / time), GameScreen.WIDTH - 190, GameScreen.HEIGHT - 30);
-        Vector playerPosition = Level.currentLevel().underlyingLevel().player().bounds().position();
-        graphics.drawString("Align: " + playerPosition.x() % 3, GameScreen.WIDTH - 190, GameScreen.HEIGHT - 20);
-        graphics.drawString(String.format("Coords: (%.2f, %.2f)", playerPosition.x(), playerPosition.y()), GameScreen.WIDTH - 190, GameScreen.HEIGHT - 10);
         gameScreen.paintToBuffer(map);
         t2 = System.currentTimeMillis();
         ThreadUtil.sleep(1000 / fps - (t2 - t1));
