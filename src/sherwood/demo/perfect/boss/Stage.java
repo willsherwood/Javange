@@ -11,6 +11,7 @@ import sherwood.demo.game.structures.levels.HardViewportLevel;
 import sherwood.demo.game.structures.levels.Level;
 import sherwood.demo.game.structures.levels.LevelState;
 import sherwood.demo.game.structures.levels.event.Event;
+import sherwood.demo.perfect.boss.attacks.CosineFruit;
 import sherwood.demo.perfect.boss.attacks.ScreenFlash;
 import sherwood.gameScreen.FPSUpdateAlgorithm;
 import sherwood.gameScreen.GameScreen;
@@ -46,6 +47,7 @@ public class Stage extends LevelState {
             level.add(k, 1);
             spikeTriggers.add(k);
         }
+        CosineFruit.lastUp = false;
         container.penny = new Penny();
     }
 
@@ -92,7 +94,7 @@ public class Stage extends LevelState {
     @Override
     public void init () {
         super.init();
-        GameScreen.get().requestUpdateAlgorithm(new SkipAlgo(container, -350));
+        GameScreen.get().requestUpdateAlgorithm(new SkipAlgo(container, 550));
     }
 
     private static final class Container {
@@ -105,7 +107,7 @@ public class Stage extends LevelState {
         private final int phase;
 
         public SkipAlgo (Container container, int phase) {
-            super(52);
+            super(30);
             this.penny = container;
             this.phase = phase;
         }

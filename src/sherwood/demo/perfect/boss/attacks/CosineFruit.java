@@ -24,18 +24,19 @@ public class CosineFruit implements Stepper, Drawable, Collider {
     private final double amplitude;
     private double time = 0;
     private BoundingBox box;
-    private static boolean lastUp;
+    public static boolean lastUp;
     private boolean up;
 
-    public CosineFruit (double amplitude) {
+    public CosineFruit(double amplitude) {
         box = new BoundingBox(-10, GameScreen.HEIGHT - 32 * 4, 21, 22);
         this.amplitude = amplitude;
         up = lastUp = !lastUp;
     }
 
     @Override
-    public void draw (Graphics2D g, Vector position) {
-        if (up)
+    public void draw(Graphics2D g, Vector position) {
+        g.setColor(Color.YELLOW);
+        g.fill(bounds().rect());
         g.setStroke(new BasicStroke(5));
         if (up) {
             g.setColor(Color.cyan);
@@ -51,7 +52,7 @@ public class CosineFruit implements Stepper, Drawable, Collider {
     }
 
     @Override
-    public void collide (Entity entity) {
+    public void collide(Entity entity) {
         if (!(entity instanceof Player))
             return;
         // copy from elliptical
@@ -63,13 +64,18 @@ public class CosineFruit implements Stepper, Drawable, Collider {
     }
 
     @Override
-    public void step (EnumSet<Control> keys) {
+    public void step(EnumSet<Control> keys) {
         double adjusted = time++ / (60) * Math.PI;
         box = box.over(new Vector(Math.abs((time / 100 + 1) * amplitude * Math.sin(adjusted)), amplitude * Math.cos(adjusted)));
     }
 
     @Override
-    public BoundingBox bounds () {
-        return new BoundingBox(box.x(), up ? 0 : box.y(), 21, up ? box.y() : GameScreen.HEIGHT - box.y());
+    public BoundingBox bounds() {
+        return new BoundingBox(box.x(), up ? 0 : box.y(), 21, up ? box.y() + 22 : GameScreen.HEIGHT - box.y());
+    }
+
+    public Entity reverse() {
+        this.up = !up;
+        return this;
     }
 }
