@@ -113,18 +113,18 @@ public class Penny implements Stepper, Drawable {
                 Level.currentLevel().underlyingLevel().add(new CosineFruit(2.5), 10);
             return;
         }
-        if (phase >= 355) {
+        if (phase >= 355 && phase < 912) {
             if (phase % 19 == 0) {
                 if (phase == 703 - 19) {
                     Level.currentLevel().underlyingLevel().add(new CosineFruit(2.5).reverse(), 10);
                 } else
                 Level.currentLevel().underlyingLevel().add(new CosineFruit(2.5), 10);
             }
-            phase++;
         }
+        if (phase >= 355)
+            phase++;
         if (phase >= 779 && phase <= 779 + 19 * 6) {
             if (phase % 19 == 0) {
-                System.out.println(phase);
                 Level.currentLevel().activate(Event.playerJump, (phase - 779) / 19);
             }
         }
@@ -139,6 +139,15 @@ public class Penny implements Stepper, Drawable {
                 Level.currentLevel().activate(Event.playerJump, x / 4);
             }
         }
+        if (phase == 1064) {
+            Level.currentLevel().activate(Event.playerJump, 7);
+        }
+        if (phase == 1100) {
+            Level.currentLevel().activate(Event.playerJump, 6);
+            Level.currentLevel().activate(Event.playerJump, 8);
+
+        }
+
         if (phase == 0) {
             velocity += box.position().x() < GameScreen.WIDTH / 2 ? 0.15 : -0.45;
             box = box.over(new Vector(velocity, velocity / 5));

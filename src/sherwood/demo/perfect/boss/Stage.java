@@ -94,7 +94,7 @@ public class Stage extends LevelState {
     @Override
     public void init () {
         super.init();
-        GameScreen.get().requestUpdateAlgorithm(new SkipAlgo(container, 550));
+        GameScreen.get().requestUpdateAlgorithm(new SkipAlgo(container, -1));
     }
 
     private static final class Container {
@@ -107,7 +107,7 @@ public class Stage extends LevelState {
         private final int phase;
 
         public SkipAlgo (Container container, int phase) {
-            super(30);
+            super(50);
             this.penny = container;
             this.phase = phase;
         }

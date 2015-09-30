@@ -11,6 +11,6 @@ public class Main {
     public static ScreenState DEFAULT_SCREENSTATE = new Stage();
 
     public static void main (String[] args) {
-        SwingUtilities.invokeLater(() -> GameScreen.start(DEFAULT_SCREENSTATE, "Kayin.pyoko"));
+        SwingUtilities.invokeLater(() -> GameScreen.start(DEFAULT_SCREENSTATE, "Javange"));
     }
 }

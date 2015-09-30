@@ -35,8 +35,6 @@ public class CosineFruit implements Stepper, Drawable, Collider {
 
     @Override
     public void draw(Graphics2D g, Vector position) {
-        g.setColor(Color.YELLOW);
-        g.fill(bounds().rect());
         g.setStroke(new BasicStroke(5));
         if (up) {
             g.setColor(Color.cyan);
